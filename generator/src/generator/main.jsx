@@ -6,6 +6,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import Numbers from "./numbers/numbers.jsx";
+import Colors from "./colors/colors.jsx";
+import SequenceElement from "./sequences/sequences-element.jsx";
+import SequenceRandomize from "./sequences/sequences-randomize.jsx";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class Main extends React.Component {
@@ -19,14 +24,7 @@ class Main extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="/numbers">Numbers</Nav.Link>
-                <NavDropdown title="Colors" id="colors-dropdown">
-                  <NavDropdown.Item href="/colors/single">
-                    Single Color
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/colors/palatte">
-                    Color Palatte
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <Nav.Link href="/Colors">Colors</Nav.Link>
                 <NavDropdown title="Sequences" id="sequences-dropdown">
                   <NavDropdown.Item href="/sequences/element">
                     Random Element
@@ -41,22 +39,19 @@ class Main extends React.Component {
           <br />
           <Switch>
             <Route exact path="/">
-              home
+              Home
             </Route>
             <Route exact path="/numbers">
-              numbers
+              <Numbers />
             </Route>
-            <Route exact path="/colors/single">
-              single
-            </Route>
-            <Route exact path="/colors/palatte">
-              palatte
+            <Route exact path="/colors">
+              <Colors />
             </Route>
             <Route exact path="/sequences/element">
-              element
+              <SequenceElement />
             </Route>
             <Route exact path="/sequences/randomize">
-              randomize
+              <SequenceRandomize />
             </Route>
           </Switch>
         </Router>
