@@ -16,6 +16,24 @@ class Numbers extends React.Component {
     };
   }
 
+  handleMinChange = (event) => {
+    this.setState({
+      min: parseInt(event.target.value),
+    });
+  };
+
+  handleMaxChange = (event) => {
+    this.setState({
+      max: parseInt(event.target.value),
+    });
+  };
+
+  handleSizeChange = (event) => {
+    this.setState({
+      size: parseInt(event.target.value),
+    });
+  };
+
   setOpen = (visibility) => {
     this.setState({
       open: visibility,
@@ -23,11 +41,19 @@ class Numbers extends React.Component {
   };
 
   generateNum() {
-    let newResult =
-      Math.floor(Math.random() * Math.ceil(this.state.max)) + this.state.min;
-    this.setState({
-      result: newResult,
-    });
+    if (this.state.max <= this.state.min) {
+      alert("Invalid range!");
+    } else if (this.state.size < 1) {
+      alert("Invalid numbers in sequence!");
+    } else {
+      let newResult = Math.floor(
+        Math.random() * (this.state.max - this.state.min + 1) + this.state.min
+      );
+
+      this.setState({
+        result: newResult,
+      });
+    }
   }
 
   render() {
@@ -39,9 +65,7 @@ class Numbers extends React.Component {
         </p>
         <br />
         <h1 className="result">{this.state.result}</h1>
-        <p>{this.state.min}</p>
-        <p>{this.state.max}</p>
-        <p>{this.state.size}</p>
+
         <Button onClick={() => this.generateNum()}>Generate</Button>
         <br />
 
@@ -63,6 +87,7 @@ class Numbers extends React.Component {
                   <Form.Control
                     type="number"
                     placeholder={this.state.min}
+                    onChange={this.handleMinChange}
                   ></Form.Control>
                 </Col>
               </Form.Group>
@@ -72,6 +97,7 @@ class Numbers extends React.Component {
                   <Form.Control
                     type="number"
                     placeholder={this.state.max}
+                    onChange={this.handleMaxChange}
                   ></Form.Control>
                 </Col>
               </Form.Group>
@@ -82,6 +108,7 @@ class Numbers extends React.Component {
                   <Form.Control
                     type="number"
                     placeholder={this.state.size}
+                    onChange={this.handleSizeChange}
                   ></Form.Control>
                 </Col>
               </Form.Group>
