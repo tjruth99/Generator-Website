@@ -1,0 +1,17 @@
+.settings {
+  margin: auto;
+  width: 45%;
+}
+
+.settings-button {
+  margin-top: 1cm;
+  margin-bottom: 1cm;
+}
+
+.result {
+  font-size: 10em;
+}
+
+.description-text {
+  font-size: 1.5em;
+}

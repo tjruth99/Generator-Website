@@ -1,8 +1,10 @@
 import React from "react";
 
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+//import Navbar from "react-bootstrap/Navbar";
+//import Nav from "react-bootstrap/Nav";
+//import NavDropdown from "react-bootstrap/NavDropdown";
+
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
