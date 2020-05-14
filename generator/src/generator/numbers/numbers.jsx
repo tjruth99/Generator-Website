@@ -91,13 +91,8 @@ class Numbers extends React.Component {
         <Button onClick={() => this.generateNum()}>Generate</Button>
         <br />
 
-        <Modal
-          show={this.state.resultShow}
-          onHide={this.handleClose}
-          size="lg"
-          centered
-        >
-          <Modal.Header closeButton>
+        <Modal show={this.state.resultShow} size="lg" centered>
+          <Modal.Header>
             <Modal.Title>Result:</Modal.Title>
           </Modal.Header>
           <Modal.Body>
