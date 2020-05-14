@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Col, Collapse, Form } from "react-bootstrap";
+import { Button, Col, Collapse, Form, Modal } from "react-bootstrap";
 
 import "../generator.css";
 
@@ -8,11 +8,12 @@ class Numbers extends React.Component {
   constructor() {
     super();
     this.state = {
-      result: 0,
+      result: [0, 1, 2],
       min: 0,
       max: 10,
       size: 1,
-      open: false,
+      settingsShow: false,
+      resultShow: false,
     };
   }
 
@@ -34,9 +35,15 @@ class Numbers extends React.Component {
     });
   };
 
-  setOpen = (visibility) => {
+  handleClose = (event) => {
     this.setState({
-      open: visibility,
+      resultShow: false,
+    });
+  };
+
+  setSettingsShow = (visibility) => {
+    this.setState({
+      settingsShow: visibility,
     });
   };
 
@@ -45,10 +52,25 @@ class Numbers extends React.Component {
       alert("Invalid range!");
     } else if (this.state.size < 1) {
       alert("Invalid numbers in sequence!");
+    } else if (this.state.size > 1) {
+      this.setState({ resultShow: true });
+      var resultArr = [];
+      var i;
+      for (i = 0; i < this.state.size; i++) {
+        resultArr[i] = Math.floor(
+          Math.random() * (this.state.max - this.state.min + 1) + this.state.min
+        );
+      }
+
+      this.setState({
+        result: resultArr,
+      });
     } else {
-      let newResult = Math.floor(
-        Math.random() * (this.state.max - this.state.min + 1) + this.state.min
-      );
+      let newResult = [
+        Math.floor(
+          Math.random() * (this.state.max - this.state.min + 1) + this.state.min
+        ),
+      ];
 
       this.setState({
         result: newResult,
@@ -64,22 +86,45 @@ class Numbers extends React.Component {
           Get a series of random numbers within a range
         </p>
         <br />
-        <h1 className="result">{this.state.result}</h1>
+        <h1 className="result">{this.state.result[0]}</h1>
 
         <Button onClick={() => this.generateNum()}>Generate</Button>
         <br />
 
+        <Modal
+          show={this.state.resultShow}
+          onHide={this.handleClose}
+          size="lg"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Result:</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ul>
+              {this.state.result.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         <Button
-          onClick={() => this.setOpen(!this.state.open)}
+          onClick={() => this.setSettingsShow(!this.state.settingsShow)}
           aria-controls="collapse-settings"
-          aria-expanded={this.state.open}
+          aria-expanded={this.state.settingsShow}
           className="settings-button"
         >
           Settings
         </Button>
         <br />
         <div className="settings">
-          <Collapse in={this.state.open} fluid>
+          <Collapse in={this.state.settingsShow} fluid>
             <Form>
               <Form.Group>
                 <Form.Label>Min</Form.Label>
