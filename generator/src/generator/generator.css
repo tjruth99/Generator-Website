@@ -8,8 +8,29 @@
   margin-bottom: 1cm;
 }
 
-.result {
+.resultContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.previousResult {
+  flex: 1;
   font-size: 10em;
+  opacity: 50%;
+  text-align: center;
+  margin: 1em auto;
+  padding: 5px;
+}
+
+.result {
+  flex: 1;
+  font-size: 10em;
+  text-align: center;
+  margin: 1em auto;
+  padding: 5px;
 }
 
 .description-text {

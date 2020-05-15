@@ -8,7 +8,8 @@ class Numbers extends React.Component {
   constructor() {
     super();
     this.state = {
-      result: [0, 1, 2],
+      result: [0],
+      prevResult: 0,
       min: 0,
       max: 10,
       size: 1,
@@ -72,9 +73,10 @@ class Numbers extends React.Component {
         ),
       ];
 
-      this.setState({
+      this.setState((cur) => ({
         result: newResult,
-      });
+        prevResult: cur.result,
+      }));
     }
   }
 
@@ -85,8 +87,13 @@ class Numbers extends React.Component {
         <p className="description-text">
           Get a series of random numbers within a range
         </p>
-        <br />
-        <h1 className="result">{this.state.result[0]}</h1>
+        <div className="resultContainer">
+          <div className="previousResult">{this.state.prevResult}</div>
+          <div className="result">
+            <b>{this.state.result[0]}</b>
+          </div>
+          <div className="result"></div>
+        </div>
 
         <Button onClick={() => this.generateNum()}>Generate</Button>
         <br />
