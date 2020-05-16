@@ -8,6 +8,14 @@
   margin-bottom: 1cm;
 }
 
+#numPrevResult {
+  font-size: 5em;
+}
+
+#numResult {
+  font-size: 10em;
+}
+
 .resultContainer {
   display: flex;
   flex-direction: row;
@@ -19,7 +27,6 @@
 
 .previousResult {
   flex: 1;
-  font-size: 5em;
   opacity: 50%;
   text-align: center;
   margin: 1em auto;
@@ -33,7 +40,6 @@
 
 .result {
   flex: 1;
-  font-size: 10em;
   text-align: center;
   margin: 1em auto;
   padding: 5px;

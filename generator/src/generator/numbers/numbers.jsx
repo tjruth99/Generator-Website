@@ -96,6 +96,7 @@ class Numbers extends React.Component {
                 ? "previousResult previousResult-animation"
                 : "previousResult"
             }
+            id="numPrevResult"
           >
             {this.state.prevResult}
           </div>
@@ -103,6 +104,7 @@ class Numbers extends React.Component {
             className={
               this.state.animate ? "result result-animation" : "result"
             }
+            id="numResult"
             onAnimationEnd={() => this.setState({ animate: false })}
           >
             <b>{this.state.result[0]}</b>
