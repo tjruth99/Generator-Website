@@ -15,6 +15,7 @@ class Numbers extends React.Component {
       size: 1,
       settingsShow: false,
       resultShow: false,
+      animate: false,
     };
   }
 
@@ -76,6 +77,7 @@ class Numbers extends React.Component {
       this.setState((cur) => ({
         result: newResult,
         prevResult: cur.result,
+        animate: true,
       }));
     }
   }
@@ -88,8 +90,21 @@ class Numbers extends React.Component {
           Get a series of random numbers within a range
         </p>
         <div className="resultContainer">
-          <div className="previousResult">{this.state.prevResult}</div>
-          <div className="result">
+          <div
+            className={
+              this.state.animate
+                ? "previousResult previousResult-animation"
+                : "previousResult"
+            }
+          >
+            {this.state.prevResult}
+          </div>
+          <div
+            className={
+              this.state.animate ? "result result-animation" : "result"
+            }
+            onAnimationEnd={() => this.setState({ animate: false })}
+          >
             <b>{this.state.result[0]}</b>
           </div>
           <div className="result"></div>
