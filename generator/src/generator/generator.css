@@ -12,6 +12,17 @@
   font-size: 5em;
 }
 
+#colorResult {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  border: 2px solid black;
+}
+
+#colorNumResult {
+  font-size: 3em;
+}
+
 #numResult {
   font-size: 10em;
 }
@@ -22,6 +33,7 @@
   justify-content: space-around;
   align-items: baseline;
   width: 75%;
+  text-align: center;
   margin: 0 auto;
 }
 
