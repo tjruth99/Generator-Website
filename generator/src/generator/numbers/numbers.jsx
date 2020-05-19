@@ -4,6 +4,9 @@ import { Button, Col, Collapse, Form, Modal } from "react-bootstrap";
 
 import "../generator.css";
 
+const MIN_VALUE = -1000000000;
+const MAX_VALUE = 1000000000;
+
 class Numbers extends React.Component {
   constructor() {
     super();
@@ -20,20 +23,35 @@ class Numbers extends React.Component {
   }
 
   handleMinChange = (event) => {
+    var newMin = parseInt(event.target.value);
+    if (newMin < MIN_VALUE) {
+      newMin = MIN_VALUE;
+    }
+
     this.setState({
-      min: parseInt(event.target.value),
+      min: newMin,
     });
   };
 
   handleMaxChange = (event) => {
+    var newMax = parseInt(event.target.value);
+    if (newMax > MAX_VALUE) {
+      newMax = MAX_VALUE;
+    }
+
     this.setState({
-      max: parseInt(event.target.value),
+      max: newMax,
     });
   };
 
   handleSizeChange = (event) => {
+    var newSize = parseInt(event.target.value);
+    if (newSize < 1) {
+      newSize = 1;
+    }
+
     this.setState({
-      size: parseInt(event.target.value),
+      size: newSize,
     });
   };
 
@@ -52,8 +70,6 @@ class Numbers extends React.Component {
   generateNum() {
     if (this.state.max <= this.state.min) {
       alert("Invalid range!");
-    } else if (this.state.size < 1) {
-      alert("Invalid numbers in sequence!");
     } else if (this.state.size > 1) {
       this.setState({ resultShow: true });
       var resultArr = [];
@@ -150,7 +166,7 @@ class Numbers extends React.Component {
                 <Col>
                   <Form.Control
                     type="number"
-                    placeholder={this.state.min}
+                    value={this.state.min}
                     onChange={this.handleMinChange}
                   ></Form.Control>
                 </Col>
@@ -160,7 +176,7 @@ class Numbers extends React.Component {
                 <Col>
                   <Form.Control
                     type="number"
-                    placeholder={this.state.max}
+                    value={this.state.max}
                     onChange={this.handleMaxChange}
                   ></Form.Control>
                 </Col>
@@ -171,7 +187,7 @@ class Numbers extends React.Component {
                   <Form.Label>How many numbers to generate</Form.Label>
                   <Form.Control
                     type="number"
-                    placeholder={this.state.size}
+                    value={this.state.size}
                     onChange={this.handleSizeChange}
                   ></Form.Control>
                 </Col>
