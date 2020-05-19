@@ -35,11 +35,28 @@ class Colors extends React.Component {
       green: 0,
       blue: 0,
       hex: "#000000",
-      numberOfColors: 1,
+      size: 1,
       colors: ["#000000"],
       settingsShow: false,
     };
   }
+
+  handleSizeChange = (event) => {
+    var newSize = parseInt(event.target.value);
+    if (newSize < 1) {
+      newSize = 1;
+    }
+
+    this.setState({
+      size: newSize,
+    });
+  };
+
+  handleMaxChange = (event) => {
+    this.setState({
+      max: parseInt(event.target.value),
+    });
+  };
 
   setSettingsShow = (visibility) => {
     this.setState({
@@ -50,7 +67,7 @@ class Colors extends React.Component {
   generateColor() {
     var newColors = [];
 
-    for (var i = 0; i < this.state.numberOfColors; i++) {
+    for (var i = 0; i < this.state.size; i++) {
       let red = Math.floor(Math.random() * 256);
       let green = Math.floor(Math.random() * 256);
       let blue = Math.floor(Math.random() * 256);
@@ -103,8 +120,6 @@ class Colors extends React.Component {
             {this.state.colors.map((item) => (
               <ColorDisplay hex={item} />
             ))}
-
-            {/* <ColorDisplay hex={this.state.hex} />*/}
             <p id="colorNumResult">
               <b>
                 R: {this.state.red} G: {this.state.green} B: {this.state.blue}
@@ -129,7 +144,27 @@ class Colors extends React.Component {
         <br />
         <div className="settings">
           <Collapse in={this.state.settingsShow} fluid>
-            <Form></Form>
+            <Form>
+              <Form.Group controlId="exampleForm.ControlInput1">
+                <Form.Label>Number of Colors to Generate:</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={this.state.size}
+                  onChange={this.handleSizeChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="exampleForm.ControlSelect1">
+                <Form.Label>Palatte Type:</Form.Label>
+                <Form.Control as="select">
+                  <option>None (Completely Random)</option>
+                  <option>Selected Saturation (One Hue)</option>
+                  <option>Complementary (Two Hues)</option>
+                  <option>Triadic (Three Hues)</option>
+                  <option>Neon</option>
+                  <option>Pastel</option>
+                </Form.Control>
+              </Form.Group>
+            </Form>
           </Collapse>
         </div>
       </>
