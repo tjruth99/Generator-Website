@@ -38,7 +38,7 @@ class ColorDisplay extends React.Component {
           delay={{ show: 100, hide: 500 }}
           overlay={<Tooltip id="tooltip-color">{this.state.hex}</Tooltip>}
         >
-          <div id="colorResult" style={{ background: this.state.hex }}></div>
+          <div id="result-color" style={{ background: this.state.hex }}></div>
         </OverlayTrigger>
       </>
     );
@@ -132,7 +132,7 @@ class Colors extends React.Component {
           palettes to customize the feel.
         </p>
 
-        <div className="resultContainer">
+        <div className="result-container">
           <div className="result">
             {this.state.colors.map((item) => (
               <ColorDisplay hex={item} />

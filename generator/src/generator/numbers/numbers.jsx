@@ -105,14 +105,14 @@ class Numbers extends React.Component {
         <p className="description-text">
           Get a series of random numbers within a range
         </p>
-        <div className="resultContainer">
+        <div className="result-container">
           <div
             className={
               this.state.animate
-                ? "previousResult previousResult-animation"
-                : "previousResult"
+                ? "result-previous result-previous-animation"
+                : "result-previous"
             }
-            id="numPrevResult"
+            id="result-numbers-prev"
           >
             {this.state.prevResult}
           </div>
@@ -120,7 +120,7 @@ class Numbers extends React.Component {
             className={
               this.state.animate ? "result result-animation" : "result"
             }
-            id="numResult"
+            id="result-numbers"
             onAnimationEnd={() => this.setState({ animate: false })}
           >
             <b>{this.state.result[0]}</b>
