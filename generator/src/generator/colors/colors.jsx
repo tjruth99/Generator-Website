@@ -1,6 +1,12 @@
 import React from "react";
 
-import { Button, Collapse, Form } from "react-bootstrap";
+import {
+  Button,
+  Collapse,
+  Form,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 
 import "../generator.css";
 
@@ -8,6 +14,12 @@ class ColorDisplay extends React.Component {
   constructor() {
     super();
     this.state = { hex: "#000000" };
+  }
+
+  componentDidMount() {
+    this.setState({
+      hex: this.props.hex,
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -21,7 +33,13 @@ class ColorDisplay extends React.Component {
   render() {
     return (
       <>
-        <div id="colorResult" style={{ background: this.state.hex }}></div>
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 100, hide: 500 }}
+          overlay={<Tooltip id="tooltip-color">{this.state.hex}</Tooltip>}
+        >
+          <div id="colorResult" style={{ background: this.state.hex }}></div>
+        </OverlayTrigger>
       </>
     );
   }
@@ -73,7 +91,6 @@ class Colors extends React.Component {
       let blue = Math.floor(Math.random() * 256);
 
       var redHex = red.toString(16);
-      console.log(redHex);
       if (redHex.length < 2) {
         redHex = "0" + redHex;
       }

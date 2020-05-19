@@ -8,6 +8,10 @@
   margin-bottom: 1cm;
 }
 
+#tooltip-color {
+  font-size: 1.5em;
+}
+
 #numPrevResult {
   font-size: 5em;
 }
@@ -17,6 +21,7 @@
   height: 150px;
   display: inline-block;
   border: 2px solid black;
+  margin: 3px;
 }
 
 #colorNumResult {
