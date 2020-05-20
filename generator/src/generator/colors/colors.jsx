@@ -10,6 +10,15 @@ import {
 
 import "../generator.css";
 
+let paletteList = [
+  "None (Completely Random)",
+  "Selected Saturation (One Hue)",
+  "Complementary (Two Hues)",
+  "Triadic (Three Hues)",
+  "Neon",
+  "Pastel",
+];
+
 class ColorDisplay extends React.Component {
   constructor() {
     super();
@@ -49,11 +58,8 @@ class Colors extends React.Component {
   constructor() {
     super();
     this.state = {
-      red: 0,
-      green: 0,
-      blue: 0,
-      hex: "#000000",
       size: 1,
+      paletteType: 0,
       colors: ["#000000"],
       settingsShow: false,
     };
@@ -70,9 +76,17 @@ class Colors extends React.Component {
     });
   };
 
-  handleMaxChange = (event) => {
+  handlePaletteChange = (event) => {
+    let selected = event.target.value;
+    var type = -1;
+    for (var i = 0; i < paletteList.length; i++) {
+      if (selected === paletteList[i]) {
+        type = i;
+      }
+    }
+
     this.setState({
-      max: parseInt(event.target.value),
+      paletteType: type,
     });
   };
 
@@ -109,13 +123,6 @@ class Colors extends React.Component {
       newHex = newHex.concat(redHex, greenHex, blueHex).toUpperCase();
 
       newColors.push(newHex);
-
-      this.setState({
-        red: red,
-        green: green,
-        blue: blue,
-        hex: newHex,
-      });
     }
 
     this.setState({
@@ -137,13 +144,6 @@ class Colors extends React.Component {
             {this.state.colors.map((item) => (
               <ColorDisplay hex={item} />
             ))}
-            <p id="colorNumResult">
-              <b>
-                R: {this.state.red} G: {this.state.green} B: {this.state.blue}
-              </b>
-              <br />
-              <b>Hex: {this.state.hex}</b>
-            </p>
           </div>
         </div>
 
@@ -172,13 +172,10 @@ class Colors extends React.Component {
               </Form.Group>
               <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Palatte Type:</Form.Label>
-                <Form.Control as="select">
-                  <option>None (Completely Random)</option>
-                  <option>Selected Saturation (One Hue)</option>
-                  <option>Complementary (Two Hues)</option>
-                  <option>Triadic (Three Hues)</option>
-                  <option>Neon</option>
-                  <option>Pastel</option>
+                <Form.Control as="select" onChange={this.handlePaletteChange}>
+                  {paletteList.map((i) => (
+                    <option id="option-{i}">{i}</option>
+                  ))}
                 </Form.Control>
               </Form.Group>
             </Form>
