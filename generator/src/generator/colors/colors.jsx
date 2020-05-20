@@ -96,33 +96,88 @@ class Colors extends React.Component {
     });
   };
 
+  generateRandomColor() {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+
+    var redHex = red.toString(16);
+    if (redHex.length < 2) {
+      redHex = "0" + redHex;
+    }
+
+    var greenHex = green.toString(16);
+    if (greenHex.length < 2) {
+      greenHex = "0" + greenHex;
+    }
+
+    var blueHex = blue.toString(16);
+    if (blueHex.length < 2) {
+      blueHex = "0" + blueHex;
+    }
+
+    var newHex = "#";
+    return newHex.concat(redHex, greenHex, blueHex).toUpperCase();
+  }
+
+  generateSingleHue(hue) {
+    return this.generateRandomColor();
+  }
+
+  generateComplementary(hue1, hue2) {
+    return this.generateRandomColor();
+  }
+
+  generateTriaic(hue1, hue2, hue3) {
+    return this.generateRandomColor();
+  }
+
+  generateNeon() {
+    return this.generateRandomColor();
+  }
+
+  generatePastel() {
+    let hue = Math.floor(Math.random * 360);
+    let saturation = Math.floor(Math.random * 16) + 75;
+    let lightness = Math.floor(Math.random * 16) + 75; // edit these numbers
+  }
+
   generateColor() {
     var newColors = [];
 
     for (var i = 0; i < this.state.size; i++) {
-      let red = Math.floor(Math.random() * 256);
-      let green = Math.floor(Math.random() * 256);
-      let blue = Math.floor(Math.random() * 256);
+      var hex = "";
 
-      var redHex = red.toString(16);
-      if (redHex.length < 2) {
-        redHex = "0" + redHex;
+      switch (this.state.paletteType) {
+        case 0:
+          // Completely Random Case
+          hex = this.generateRandomColor();
+          break;
+        case 1:
+          // One hue
+          hex = this.generateSingleHue("");
+          break;
+        case 2:
+          // Two hues
+          hex = this.generateComplementary("", "");
+          break;
+        case 3:
+          // Three hues
+          hex = this.generateTriaic("", "", "");
+          break;
+        case 4:
+          // Neon
+          hex = this.generateNeon();
+          break;
+        case 5:
+          // Pastel
+          hex = this.generatePastel();
+          break;
+        default:
+          hex = this.generateRandomColor();
       }
 
-      var greenHex = green.toString(16);
-      if (greenHex.length < 2) {
-        greenHex = "0" + greenHex;
-      }
-
-      var blueHex = blue.toString(16);
-      if (blueHex.length < 2) {
-        blueHex = "0" + blueHex;
-      }
-
-      var newHex = "#";
-      newHex = newHex.concat(redHex, greenHex, blueHex).toUpperCase();
-
-      newColors.push(newHex);
+      newColors.push(hex);
     }
 
     this.setState({
