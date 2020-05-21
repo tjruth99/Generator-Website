@@ -40,13 +40,60 @@ class ColorDisplay extends React.Component {
     }
   }
 
+  HexToHSL() {
+    var r = parseInt(this.state.hex.substring(1, 3), 16);
+    var g = parseInt(this.state.hex.substring(3, 5), 16);
+    var b = parseInt(this.state.hex.substring(5, 7), 16);
+
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let cmin = Math.min(r, g, b),
+      cmax = Math.max(r, g, b),
+      delta = cmax - cmin,
+      h = 0,
+      s = 0,
+      l = 0;
+
+    if (delta == 0) h = 0;
+    else if (cmax == r) h = ((g - b) / delta) % 6;
+    else if (cmax == g) h = (b - r) / delta + 2;
+    else h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+
+    if (h < 0) h += 360;
+
+    l = (cmax + cmin) / 2;
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = Math.floor(s * 100);
+    l = Math.floor(l * 100);
+
+    return "hsl(" + h + ", " + s + "%, " + l + "%)";
+  }
+
+  HexToRGB() {
+    var r = parseInt(this.state.hex.substring(1, 3), 16);
+    var g = parseInt(this.state.hex.substring(3, 5), 16);
+    var b = parseInt(this.state.hex.substring(5, 7), 16);
+    return "R: " + r + " G: " + g + " B: " + b;
+  }
+
   render() {
     return (
       <>
         <OverlayTrigger
           placement="bottom"
           delay={{ show: 100, hide: 500 }}
-          overlay={<Tooltip id="tooltip-color">{this.state.hex}</Tooltip>}
+          overlay={
+            <Tooltip id="tooltip-color">
+              {this.state.hex}
+              <br />
+              {this.HexToRGB()}
+              <br />
+              {this.HexToHSL()}
+            </Tooltip>
+          }
         >
           <div
             id="result-color"
