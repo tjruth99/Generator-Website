@@ -96,28 +96,76 @@ class Colors extends React.Component {
     });
   };
 
+  RGBtoHex(r, g, b) {
+    var redHex = r.toString(16);
+    if (redHex.length < 2) {
+      redHex = "0" + redHex;
+    }
+
+    var greenHex = g.toString(16);
+    if (greenHex.length < 2) {
+      greenHex = "0" + greenHex;
+    }
+
+    var blueHex = b.toString(16);
+    if (blueHex.length < 2) {
+      blueHex = "0" + blueHex;
+    }
+
+    var hex = "#";
+    return hex.concat(redHex, greenHex, blueHex).toUpperCase();
+  }
+
+  HSLtoHex(h, s, l) {
+    s /= 100;
+    l /= 100;
+
+    let c = (1 - Math.abs(2 * l - 1)) * s,
+      x = c * (1 - Math.abs(((h / 60) % 2) - 1)),
+      m = l - c / 2,
+      r = 0,
+      g = 0,
+      b = 0;
+
+    if (0 <= h && h < 60) {
+      r = c;
+      g = x;
+      b = 0;
+    } else if (60 <= h && h < 120) {
+      r = x;
+      g = c;
+      b = 0;
+    } else if (120 <= h && h < 180) {
+      r = 0;
+      g = c;
+      b = x;
+    } else if (180 <= h && h < 240) {
+      r = 0;
+      g = x;
+      b = c;
+    } else if (240 <= h && h < 300) {
+      r = x;
+      g = 0;
+      b = c;
+    } else if (300 <= h && h < 360) {
+      r = c;
+      g = 0;
+      b = x;
+    }
+
+    r = Math.round((r + m) * 255);
+    g = Math.round((g + m) * 255);
+    b = Math.round((b + m) * 255);
+
+    return this.RGBtoHex(r, g, b);
+  }
+
   generateRandomColor() {
     let red = Math.floor(Math.random() * 256);
     let green = Math.floor(Math.random() * 256);
     let blue = Math.floor(Math.random() * 256);
 
-    var redHex = red.toString(16);
-    if (redHex.length < 2) {
-      redHex = "0" + redHex;
-    }
-
-    var greenHex = green.toString(16);
-    if (greenHex.length < 2) {
-      greenHex = "0" + greenHex;
-    }
-
-    var blueHex = blue.toString(16);
-    if (blueHex.length < 2) {
-      blueHex = "0" + blueHex;
-    }
-
-    var newHex = "#";
-    return newHex.concat(redHex, greenHex, blueHex).toUpperCase();
+    return this.RGBtoHex(red, green, blue);
   }
 
   generateSingleHue(hue) {
@@ -128,7 +176,7 @@ class Colors extends React.Component {
     return this.generateRandomColor();
   }
 
-  generateTriaic(hue1, hue2, hue3) {
+  generateTriadic(hue1, hue2, hue3) {
     return this.generateRandomColor();
   }
 
@@ -137,9 +185,11 @@ class Colors extends React.Component {
   }
 
   generatePastel() {
-    let hue = Math.floor(Math.random * 360);
-    let saturation = Math.floor(Math.random * 16) + 75;
-    let lightness = Math.floor(Math.random * 16) + 75; // edit these numbers
+    let hue = Math.floor(Math.random() * 360);
+    let saturation = Math.floor(Math.random() * 20) + 80;
+    let lightness = Math.floor(Math.random() * 25) + 75;
+
+    return this.HSLtoHex(hue, saturation, lightness);
   }
 
   generateColor() {
@@ -163,7 +213,7 @@ class Colors extends React.Component {
           break;
         case 3:
           // Three hues
-          hex = this.generateTriaic("", "", "");
+          hex = this.generateTriadic("", "", "");
           break;
         case 4:
           // Neon
