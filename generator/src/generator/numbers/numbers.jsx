@@ -118,7 +118,7 @@ class Numbers extends React.Component {
           </div>
           <div
             className={
-              this.state.animate ? "result result-animation" : "result"
+              this.state.animate ? "result result-num-animation" : "result"
             }
             id="result-numbers"
             onAnimationEnd={() => this.setState({ animate: false })}

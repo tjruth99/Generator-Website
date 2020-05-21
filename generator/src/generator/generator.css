@@ -51,7 +51,7 @@
 }
 
 .result-previous-animation {
-  animation-name: prevShow;
+  animation-name: num-prev-animate;
   animation-duration: 1s;
 }
 
@@ -62,12 +62,22 @@
   padding: 5px;
 }
 
-.result-animation {
-  animation-name: resultSlide;
+.result-num-animation {
+  animation-name: num-animate;
   animation-duration: 1s;
 }
 
-@keyframes resultSlide {
+.result-color-animation-show {
+  animation-name: color-animate-show;
+  animation-duration: 1s;
+}
+
+.result-color-animation-change {
+  animation-name: color-animate-change;
+  animation-duration: 1s;
+}
+
+@keyframes num-animate {
   from {
     opacity: 10%;
     margin-right: -50%;
@@ -78,7 +88,7 @@
   }
 }
 
-@keyframes prevShow {
+@keyframes num-prev-animate {
   from {
     opacity: 0%;
     margin-right: -50%;
@@ -86,6 +96,32 @@
   to {
     opacity: 50%;
     margin-right: 0px;
+  }
+}
+
+@keyframes color-animate-show {
+  0% {
+    width: 10px;
+    height: 10px;
+  }
+  100% {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@keyframes color-animate-change {
+  0% {
+    width: 150px;
+    height: 150px;
+  }
+  50% {
+    width: 160px;
+    height: 160px;
+  }
+  100% {
+    width: 150px;
+    height: 150px;
   }
 }
 
