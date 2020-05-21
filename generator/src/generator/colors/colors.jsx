@@ -168,16 +168,57 @@ class Colors extends React.Component {
     return this.RGBtoHex(red, green, blue);
   }
 
-  generateSingleHue(hue) {
-    return this.generateRandomColor();
+  generateSingleHue(h) {
+    let hue = Math.floor(Math.random() * 10) + (h - 5);
+    let saturation = Math.floor(Math.random() * 100);
+    let lightness = Math.floor(Math.random() * 100);
+
+    return this.HSLtoHex(hue, saturation, lightness);
   }
 
-  generateComplementary(hue1, hue2) {
-    return this.generateRandomColor();
+  generateComplementary(h1, h2) {
+    let r = Math.floor(Math.random() * 2);
+    var hue;
+
+    switch (r) {
+      case 0:
+        hue = (Math.floor(Math.random() * 10) + (h1 - 5)) % 360;
+        break;
+      case 1:
+        hue = (Math.floor(Math.random() * 10) + (h2 - 5)) % 360;
+        break;
+      default:
+        break;
+    }
+
+    let saturation = Math.floor(Math.random() * 25) + 40;
+    let lightness = Math.floor(Math.random() * 25) + 40;
+
+    return this.HSLtoHex(hue, saturation, lightness);
   }
 
-  generateTriadic(hue1, hue2, hue3) {
-    return this.generateRandomColor();
+  generateTriadic(h1, h2, h3) {
+    let r = Math.floor(Math.random() * 3);
+    var hue;
+
+    switch (r) {
+      case 0:
+        hue = (Math.floor(Math.random() * 10) + (h1 - 5)) % 360;
+        break;
+      case 1:
+        hue = (Math.floor(Math.random() * 10) + (h2 - 5)) % 360;
+        break;
+      case 2:
+        hue = (Math.floor(Math.random() * 10) + (h3 - 5)) % 360;
+        break;
+      default:
+        break;
+    }
+
+    let saturation = Math.floor(Math.random() * 25) + 40;
+    let lightness = Math.floor(Math.random() * 25) + 40;
+
+    return this.HSLtoHex(hue, saturation, lightness);
   }
 
   generateNeon() {
@@ -214,13 +255,13 @@ class Colors extends React.Component {
           break;
         case 2:
           // Two hues
-          var rH2 = rH + 360 / 2;
+          var rH2 = (rH + 360 / 2) % 360;
           hex = this.generateComplementary(rH, rH2);
           break;
         case 3:
           // Three hues
-          rH2 = rH + 360 / 3;
-          var rH3 = rH2 + 360 / 3;
+          rH2 = (rH + 360 / 3) % 360;
+          var rH3 = (rH2 + 360 / 3) % 360;
           hex = this.generateTriadic(rH, rH2, rH3);
           break;
         case 4:
