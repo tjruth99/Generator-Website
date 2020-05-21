@@ -181,7 +181,11 @@ class Colors extends React.Component {
   }
 
   generateNeon() {
-    return this.generateRandomColor();
+    let hue = Math.floor(Math.random() * 360);
+    let saturation = Math.floor(Math.random() * 10) + 90;
+    let lightness = 50;
+
+    return this.HSLtoHex(hue, saturation, lightness);
   }
 
   generatePastel() {
@@ -194,6 +198,7 @@ class Colors extends React.Component {
 
   generateColor() {
     var newColors = [];
+    let rH = Math.floor(Math.random() * 360);
 
     for (var i = 0; i < this.state.size; i++) {
       var hex = "";
@@ -205,15 +210,18 @@ class Colors extends React.Component {
           break;
         case 1:
           // One hue
-          hex = this.generateSingleHue("");
+          hex = this.generateSingleHue(rH);
           break;
         case 2:
           // Two hues
-          hex = this.generateComplementary("", "");
+          var rH2 = rH + 360 / 2;
+          hex = this.generateComplementary(rH, rH2);
           break;
         case 3:
           // Three hues
-          hex = this.generateTriadic("", "", "");
+          rH2 = rH + 360 / 3;
+          var rH3 = rH2 + 360 / 3;
+          hex = this.generateTriadic(rH, rH2, rH3);
           break;
         case 4:
           // Neon
