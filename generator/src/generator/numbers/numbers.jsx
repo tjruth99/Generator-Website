@@ -92,7 +92,7 @@ class Numbers extends React.Component {
 
       this.setState((cur) => ({
         result: newResult,
-        prevResult: cur.result,
+        prevResult: cur.result[0],
         animate: true,
       }));
     }

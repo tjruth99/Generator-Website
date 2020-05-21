@@ -288,7 +288,7 @@ class Colors extends React.Component {
         </Button>
         <br />
         <div className="settings">
-          <Collapse in={this.state.settingsShow} fluid>
+          <Collapse in={this.state.settingsShow}>
             <Form>
               <Form.Group controlId="exampleForm.ControlInput1">
                 <Form.Label>Number of Colors to Generate:</Form.Label>
@@ -299,10 +299,10 @@ class Colors extends React.Component {
                 />
               </Form.Group>
               <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Palatte Type:</Form.Label>
+                <Form.Label>Palette Type:</Form.Label>
                 <Form.Control as="select" onChange={this.handlePaletteChange}>
                   {paletteList.map((i) => (
-                    <option id="option-{i}">{i}</option>
+                    <option key={i}>{i}</option>
                   ))}
                 </Form.Control>
               </Form.Group>
