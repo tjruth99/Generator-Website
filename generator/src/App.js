@@ -19,40 +19,24 @@ class App extends React.Component {
         <div className="App">
           <Router basename="/">
             <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-              <Navbar.Brand>
-                <Link to="/" style={{ textDecoration: "none" }}>
-                  Generator
-                </Link>
+              <Navbar.Brand as={Link} to="/">
+                Generator
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                  <Nav.Link>
-                    <Link to="/numbers" style={{ textDecoration: "none" }}>
-                      Numbers
-                    </Link>
+                  <Nav.Link as={Link} to="/numbers">
+                    Numbers
                   </Nav.Link>
-                  <Nav.Link>
-                    <Link to="/colors" style={{ textDecoration: "none" }}>
-                      Colors
-                    </Link>
+                  <Nav.Link as={Link} to="/colors">
+                    Colors
                   </Nav.Link>
                   <NavDropdown title="Sequences" id="sequences-dropdown">
-                    <NavDropdown.Item>
-                      <Link
-                        to="/sequences/element"
-                        style={{ textDecoration: "none" }}
-                      >
-                        Random Element
-                      </Link>
+                    <NavDropdown.Item as={Link} to="/sequences/element">
+                      Random Element
                     </NavDropdown.Item>
-                    <NavDropdown.Item>
-                      <Link
-                        to="/sequences/randomize"
-                        style={{ textDecoration: "none" }}
-                      >
-                        Randomize Sequence
-                      </Link>
+                    <NavDropdown.Item as={Link} to="/sequences/randomize">
+                      Randomize Sequence
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
@@ -62,6 +46,8 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/">
                 Home page WIP
+                <br />
+                Last Updated: 5/22/2020 3:20 AM
               </Route>
               <Route path="/numbers">
                 <Numbers />

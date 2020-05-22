@@ -55,9 +55,9 @@ class ColorDisplay extends React.Component {
       s = 0,
       l = 0;
 
-    if (delta == 0) h = 0;
-    else if (cmax == r) h = ((g - b) / delta) % 6;
-    else if (cmax == g) h = (b - r) / delta + 2;
+    if (delta === 0) h = 0;
+    else if (cmax === r) h = ((g - b) / delta) % 6;
+    else if (cmax === g) h = (b - r) / delta + 2;
     else h = (r - g) / delta + 4;
 
     h = Math.round(h * 60);
@@ -65,7 +65,7 @@ class ColorDisplay extends React.Component {
     if (h < 0) h += 360;
 
     l = (cmax + cmin) / 2;
-    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
     s = Math.floor(s * 100);
     l = Math.floor(l * 100);
 
@@ -311,7 +311,8 @@ class Colors extends React.Component {
         <h1>Colors</h1>
         <p>
           Generate a random color or a color palette. Choose from different
-          palettes to customize the feel.
+          palettes to customize the feel. Hover over a color to see it's color
+          code.
         </p>
 
         <div className="result-container">
