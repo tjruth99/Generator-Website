@@ -23,7 +23,7 @@ class SequencesRandomize extends React.Component {
       <>
         <h1>Randomize Sequence</h1>
         <p>Randomize a list</p>
-        <div className="resultContainer">
+        <div className="result-container">
           <div className="result"></div>
         </div>
 

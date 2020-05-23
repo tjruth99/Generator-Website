@@ -7,8 +7,14 @@ import "../generator.css";
 class SequencesElement extends React.Component {
   constructor() {
     super();
-    this.state = { settingsShow: false };
+    this.state = { input: "", result: "", settingsShow: false };
   }
+
+  handleInput = (event) => {
+    this.setState({
+      input: event.target.value,
+    });
+  };
 
   setSettingsShow = (visibility) => {
     this.setState({
@@ -16,18 +22,35 @@ class SequencesElement extends React.Component {
     });
   };
 
-  getRandomElement() {}
+  getRandomElement() {
+    let array = this.state.input.split(/\r?\n/);
+    let index = Math.floor(Math.random() * array.length);
+
+    this.setState({
+      result: array[index],
+    });
+  }
 
   render() {
     return (
       <>
         <h1>Random Element</h1>
         <p>
-          Give a list of words and we will select a random element from the
-          list.
+          Give a list of words or phrases separated on a new line and hit
+          generate to get a random element from the list
         </p>
-        <div className="resultContainer">
-          <div className="result"></div>
+        <textarea
+          className="sequences-input"
+          value={this.state.input}
+          onChange={this.handleInput}
+          wrap="off"
+          placeholder="Enter list here"
+        ></textarea>
+        <div className="result-container">
+          <br />
+          <div className="result" id="result-element">
+            {this.state.result}
+          </div>
         </div>
 
         <Button onClick={() => this.getRandomElement()}>Generate</Button>

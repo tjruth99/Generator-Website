@@ -34,7 +34,7 @@ class Template extends React.Component {
           sed molestiae quasi facilis eveniet vero exercitationem laboriosam ea
           veniam dolores ad.
         </p>
-        <div className="resultContainer">
+        <div className="result-container">
           <div className="result"></div>
         </div>
 
