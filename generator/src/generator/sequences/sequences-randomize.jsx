@@ -7,8 +7,14 @@ import "../generator.css";
 class SequencesRandomize extends React.Component {
   constructor() {
     super();
-    this.state = { settingsShow: false };
+    this.state = { input: "", result: "", settingsShow: false };
   }
+
+  handleInput = (event) => {
+    this.setState({
+      input: event.target.value,
+    });
+  };
 
   setSettingsShow = (visibility) => {
     this.setState({
@@ -16,15 +22,45 @@ class SequencesRandomize extends React.Component {
     });
   };
 
-  randomizeSequence() {}
+  randomizeSequence() {
+    var array = this.state.input.split(/\r?\n/);
+
+    var shuffle = array.length,
+      temp,
+      index;
+
+    // Shuffle the list using the Fisher-Yates shuffle
+    while (shuffle) {
+      index = Math.floor(Math.random() * shuffle--);
+
+      temp = array[shuffle];
+      array[shuffle] = array[index];
+      array[index] = temp;
+    }
+
+    // TODO: Format array to a usable output
+    this.setState({
+      result: array,
+    });
+  }
 
   render() {
     return (
       <>
         <h1>Randomize Sequence</h1>
         <p>Randomize a list</p>
+        <textarea
+          className="sequences-input"
+          value={this.state.input}
+          onChange={this.handleInput}
+          wrap="off"
+          placeholder="Enter list here"
+        ></textarea>
         <div className="result-container">
-          <div className="result"></div>
+          <br />
+          <div className="result" id="result-element">
+            {this.state.result}
+          </div>
         </div>
 
         <Button onClick={() => this.randomizeSequence()}>Generate</Button>
