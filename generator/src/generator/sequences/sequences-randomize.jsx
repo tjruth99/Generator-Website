@@ -38,9 +38,15 @@ class SequencesRandomize extends React.Component {
       array[index] = temp;
     }
 
-    // TODO: Format array to a usable output
+    var text = "";
+
+    array.forEach((element) => {
+      text = text.concat(element, "\n");
+    });
+
     this.setState({
-      result: array,
+      // Slice the extra newline from the end of the output
+      input: text.slice(0, text.length - 1),
     });
   }
 
@@ -56,13 +62,7 @@ class SequencesRandomize extends React.Component {
           wrap="off"
           placeholder="Enter list here"
         ></textarea>
-        <div className="result-container">
-          <br />
-          <div className="result" id="result-element">
-            {this.state.result}
-          </div>
-        </div>
-
+        <br />
         <Button onClick={() => this.randomizeSequence()}>Generate</Button>
         <br />
 
