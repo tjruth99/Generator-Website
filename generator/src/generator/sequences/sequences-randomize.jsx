@@ -1,24 +1,18 @@
 import React from "react";
 
-import { Button, Collapse, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import "../generator.css";
 
 class SequencesRandomize extends React.Component {
   constructor() {
     super();
-    this.state = { input: "", result: "", settingsShow: false };
+    this.state = { input: "", result: "" };
   }
 
   handleInput = (event) => {
     this.setState({
       input: event.target.value,
-    });
-  };
-
-  setSettingsShow = (visibility) => {
-    this.setState({
-      settingsShow: visibility,
     });
   };
 
@@ -65,21 +59,6 @@ class SequencesRandomize extends React.Component {
         <br />
         <Button onClick={() => this.randomizeSequence()}>Generate</Button>
         <br />
-
-        <Button
-          onClick={() => this.setSettingsShow(!this.state.settingsShow)}
-          aria-controls="collapse-settings"
-          aria-expanded={this.state.settingsShow}
-          className="settings-button"
-        >
-          Settings
-        </Button>
-        <br />
-        <div className="settings">
-          <Collapse in={this.state.settingsShow} fluid>
-            <Form></Form>
-          </Collapse>
-        </div>
       </>
     );
   }

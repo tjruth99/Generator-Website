@@ -1,13 +1,13 @@
 import React from "react";
 
-import { Button, Collapse, Form } from "react-bootstrap";
+import { Button, Collapse } from "react-bootstrap";
 
 import "../generator.css";
 
 class SequencesElement extends React.Component {
   constructor() {
     super();
-    this.state = { input: "", result: "", settingsShow: false };
+    this.state = { input: "", result: "", resultShow: false };
   }
 
   handleInput = (event) => {
@@ -16,19 +16,21 @@ class SequencesElement extends React.Component {
     });
   };
 
-  setSettingsShow = (visibility) => {
-    this.setState({
-      settingsShow: visibility,
-    });
-  };
-
   getRandomElement() {
-    let array = this.state.input.split(/\r?\n/);
-    let index = Math.floor(Math.random() * array.length);
+    if (this.state.input.length > 0) {
+      let array = this.state.input.split(/\r?\n/);
+      let index = Math.floor(Math.random() * array.length);
 
-    this.setState({
-      result: array[index],
-    });
+      this.setState({
+        result: array[index],
+        resultShow: true,
+      });
+    } else {
+      this.setState({
+        result: "",
+        resultShow: false,
+      });
+    }
   }
 
   render() {
@@ -48,28 +50,14 @@ class SequencesElement extends React.Component {
         ></textarea>
         <div className="result-container">
           <br />
-          <div className="result" id="result-element">
-            {this.state.result}
-          </div>
-        </div>
-
-        <Button onClick={() => this.getRandomElement()}>Generate</Button>
-        <br />
-
-        <Button
-          onClick={() => this.setSettingsShow(!this.state.settingsShow)}
-          aria-controls="collapse-settings"
-          aria-expanded={this.state.settingsShow}
-          className="settings-button"
-        >
-          Settings
-        </Button>
-        <br />
-        <div className="settings">
-          <Collapse in={this.state.settingsShow} fluid>
-            <Form></Form>
+          <Collapse in={this.state.resultShow} fluid>
+            <div className="result" id="result-element">
+              Result: <b>{this.state.result}</b>
+            </div>
           </Collapse>
         </div>
+        <Button onClick={() => this.getRandomElement()}>Generate</Button>
+        <br />
       </>
     );
   }
