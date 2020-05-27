@@ -6,6 +6,7 @@ import "../generator.css";
 
 const MIN_VALUE = -1000000000;
 const MAX_VALUE = 1000000000;
+const MAX_DIGIT = 15;
 
 class Numbers extends React.Component {
   constructor() {
@@ -16,6 +17,8 @@ class Numbers extends React.Component {
       min: 0,
       max: 10,
       size: 1,
+      decimal: false,
+      digits: 2,
       settingsShow: false,
       resultShow: false,
       animate: false,
@@ -61,33 +64,63 @@ class Numbers extends React.Component {
     });
   };
 
+  handleDecimalChange = (event) => {
+    this.setState((prev) => {
+      return {
+        decimal: !prev.decimal,
+      };
+    });
+  };
+
+  handleDigitsChange = (event) => {
+    var newDigit = parseInt(event.target.value);
+    if (newDigit < 1) {
+      newDigit = 1;
+    } else if (newDigit > MAX_DIGIT) {
+      newDigit = MAX_DIGIT;
+    }
+
+    this.setState({ digits: newDigit });
+  };
+
   setSettingsShow = (visibility) => {
     this.setState({
       settingsShow: visibility,
     });
   };
 
+  randomInteger() {
+    return Math.floor(
+      Math.random() * (this.state.max - this.state.min + 1) + this.state.min
+    );
+  }
+
+  randomDecimal() {
+    return (
+      Math.random() * (this.state.max - this.state.min) +
+      this.state.min
+    ).toFixed(this.state.digits);
+  }
+
   generateNum() {
     if (this.state.max <= this.state.min) {
       alert("Invalid range!");
     } else if (this.state.size > 1) {
-      this.setState({ resultShow: true });
       var resultArr = [];
       var i;
       for (i = 0; i < this.state.size; i++) {
-        resultArr[i] = Math.floor(
-          Math.random() * (this.state.max - this.state.min + 1) + this.state.min
-        );
+        resultArr[i] = this.state.decimal
+          ? this.randomDecimal()
+          : this.randomInteger();
       }
 
       this.setState({
+        resultShow: true,
         result: resultArr,
       });
     } else {
       let newResult = [
-        Math.floor(
-          Math.random() * (this.state.max - this.state.min + 1) + this.state.min
-        ),
+        this.state.decimal ? this.randomDecimal() : this.randomInteger(),
       ];
 
       this.setState((cur) => ({
@@ -189,6 +222,23 @@ class Numbers extends React.Component {
                     type="number"
                     value={this.state.size}
                     onChange={this.handleSizeChange}
+                  ></Form.Control>
+                </Col>
+              </Form.Group>
+              <hr />
+              <Form.Group>
+                <Col>
+                  <Form.Check
+                    type="checkbox"
+                    id="decimal-checkbox"
+                    label="decimal?"
+                    onChange={this.handleDecimalChange}
+                  />
+                  <Form.Label>Number of digits to round to</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={this.state.digits}
+                    onChange={this.handleDigitsChange}
                   ></Form.Control>
                 </Col>
               </Form.Group>

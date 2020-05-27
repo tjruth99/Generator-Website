@@ -39,6 +39,14 @@ class App extends React.Component {
                       Randomize Sequence
                     </NavDropdown.Item>
                   </NavDropdown>
+                  <NavDropdown title="Words" id="words-dropdown">
+                    <NavDropdown.Item as={Link} to="/words/string">
+                      Random String
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/words/name">
+                      Random Name
+                    </NavDropdown.Item>
+                  </NavDropdown>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
@@ -59,6 +67,12 @@ class App extends React.Component {
                 <SequenceElement />
               </Route>
               <Route path="/sequences/randomize">
+                <SequenceRandomize />
+              </Route>
+              <Route path="/words/string">
+                <SequenceRandomize />
+              </Route>
+              <Route path="/words/name">
                 <SequenceRandomize />
               </Route>
             </Switch>
