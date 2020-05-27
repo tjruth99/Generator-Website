@@ -4,9 +4,9 @@ import { Button, Col, Collapse, Form, Modal } from "react-bootstrap";
 
 import "../generator.css";
 
-const MIN_VALUE = -1000000000;
-const MAX_VALUE = 1000000000;
-const MAX_DIGIT = 15;
+const MIN_VALUE = -10000000000;
+const MAX_VALUE = 10000000000;
+const MAX_DIGIT = 20;
 
 class Numbers extends React.Component {
   constructor() {
@@ -125,7 +125,7 @@ class Numbers extends React.Component {
 
       this.setState((cur) => ({
         result: newResult,
-        prevResult: cur.result[0],
+        prevResult: newResult.toString().length < 9 ? cur.result[0] : null,
         animate: true,
       }));
     }
@@ -166,10 +166,10 @@ class Numbers extends React.Component {
 
         <Modal show={this.state.resultShow} size="lg" centered>
           <Modal.Header>
-            <Modal.Title>Result:</Modal.Title>
+            <Modal.Title>Results:</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ul>
+            <ul class="multiple-result">
               {this.state.result.map((item) => (
                 <li>{item}</li>
               ))}

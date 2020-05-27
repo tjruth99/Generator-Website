@@ -8,13 +8,17 @@
   margin-bottom: 1cm;
 }
 
+.multiple-result {
+  font-size: 2em;
+}
+
 #tooltip-color {
   font-size: 1em;
   width: 200px;
 }
 
 #result-numbers-prev {
-  font-size: 5em;
+  font-size: 4em;
 }
 
 #result-color {
@@ -30,7 +34,7 @@
 }
 
 #result-numbers {
-  font-size: 10em;
+  font-size: 6em;
 }
 
 #result-element {
