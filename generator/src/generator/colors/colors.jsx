@@ -21,6 +21,8 @@ let paletteList = [
   "Pastel",
 ];
 
+const MAX_SIZE = 100;
+
 class ColorDisplay extends React.Component {
   constructor() {
     super();
@@ -130,7 +132,9 @@ class ColorGenerator extends React.Component {
 
   handleSizeChange = (event) => {
     var newSize = parseInt(event.target.value);
-    if (newSize < 1) {
+    if (newSize > MAX_SIZE) {
+      newSize = MAX_SIZE;
+    } else if (newSize < 1) {
       newSize = 1;
     }
 

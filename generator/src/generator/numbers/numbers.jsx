@@ -6,6 +6,7 @@ import "../generator.css";
 
 const MIN_VALUE = -10000000000;
 const MAX_VALUE = 10000000000;
+const MAX_SIZE = 100000;
 const MAX_DIGIT = 20;
 
 class NumberGenerator extends React.Component {
@@ -49,7 +50,9 @@ class NumberGenerator extends React.Component {
 
   handleSizeChange = (event) => {
     var newSize = parseInt(event.target.value);
-    if (newSize < 1) {
+    if (newSize > MAX_SIZE) {
+      newSize = MAX_SIZE;
+    } else if (newSize < 1) {
       newSize = 1;
     }
 
