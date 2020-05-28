@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Col, Collapse, Form, Row } from "react-bootstrap";
+import { Button, Col, Collapse, Form, Modal, Row } from "react-bootstrap";
 
 import "../generator.css";
 
@@ -17,6 +17,7 @@ class StringGenerator extends React.Component {
       useUpperCase: false,
       useNumbers: false,
       useSymbols: false,
+      multipleShow: false,
       settingsShow: false,
     };
   }
@@ -83,6 +84,12 @@ class StringGenerator extends React.Component {
     });
   };
 
+  handleClose = () => {
+    this.setState({
+      multipleShow: false,
+    });
+  };
+
   generateString() {
     if (
       !this.state.useLowerCase &&
@@ -93,8 +100,9 @@ class StringGenerator extends React.Component {
       alert("Please select at least one character set!");
     }
 
-    var characterSet = [];
-    var i;
+    var characterSet = [],
+      i,
+      results = [];
 
     if (this.state.useLowerCase) {
       for (i = 97; i < 123; i++) {
@@ -120,13 +128,27 @@ class StringGenerator extends React.Component {
       }
     }
 
-    var newString = "";
-    for (i = 0; i < this.state.size; i++) {
-      let c = characterSet[Math.floor(Math.random() * characterSet.length)];
-      newString += c;
+    for (i = 0; i < this.state.numberOfStrings; i++) {
+      var newString = "",
+        j;
+      for (j = 0; j < this.state.size; j++) {
+        let c = characterSet[Math.floor(Math.random() * characterSet.length)];
+        newString += c;
+      }
+      results[i] = newString;
     }
 
-    this.setState({ result: [newString] });
+    if (this.state.numberOfStrings > 1) {
+      this.setState({
+        result: results,
+        multipleShow: true,
+      });
+    } else {
+      this.setState({
+        result: results,
+        multipleShow: false,
+      });
+    }
   }
 
   render() {
@@ -141,6 +163,24 @@ class StringGenerator extends React.Component {
             <b>{this.state.result[0]}</b>
           </div>
         </div>
+
+        <Modal show={this.state.multipleShow} size="lg" centered>
+          <Modal.Header>
+            <Modal.Title>Results:</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ul class="multiple-result">
+              {this.state.result.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
         <Button onClick={() => this.generateString()}>Generate</Button>
         <br />
