@@ -38,6 +38,10 @@
   font-size: 6em;
 }
 
+#result-string {
+  font-size: 3em;
+}
+
 #result-element {
   font-size: 5em;
 }

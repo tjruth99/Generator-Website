@@ -203,7 +203,7 @@ class Numbers extends React.Component {
                     type="number"
                     value={this.state.min}
                     onChange={this.handleMinChange}
-                  ></Form.Control>
+                  />
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>
