@@ -4,6 +4,7 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import HomePage from "./generator/HomePage";
 import NumberGenerator from "./generator/numbers/numbers.jsx";
 import ColorGenerator from "./generator/colors/colors.jsx";
 import SequenceElement from "./generator/sequences/sequences-element.jsx";
@@ -55,9 +56,7 @@ class App extends React.Component {
             <br />
             <Switch>
               <Route exact path="/">
-                Home page WIP
-                <br />
-                Last Updated: 5/22/2020 3:20 AM
+                <HomePage />
               </Route>
               <Route path="/numbers">
                 <NumberGenerator />

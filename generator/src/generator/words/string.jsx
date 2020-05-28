@@ -11,7 +11,7 @@ class StringGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
-      result: [""],
+      result: ["Press Generate"],
       size: 8,
       numberOfStrings: 1,
       useLowerCase: true,
