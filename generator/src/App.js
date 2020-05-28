@@ -8,6 +8,8 @@ import Numbers from "./generator/numbers/numbers.jsx";
 import Colors from "./generator/colors/colors.jsx";
 import SequenceElement from "./generator/sequences/sequences-element.jsx";
 import SequenceRandomize from "./generator/sequences/sequences-randomize.jsx";
+import String from "./generator/words/string.jsx";
+import Name from "./generator/words/name.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -70,10 +72,10 @@ class App extends React.Component {
                 <SequenceRandomize />
               </Route>
               <Route path="/words/string">
-                <SequenceRandomize />
+                <String />
               </Route>
               <Route path="/words/name">
-                <SequenceRandomize />
+                <Name />
               </Route>
             </Switch>
           </Router>
