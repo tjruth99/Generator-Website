@@ -6,11 +6,11 @@ import "../generator.css";
 
 const MAX_SIZE = 100;
 
-class String extends React.Component {
+class StringGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
-      result: ["test"],
+      result: [""],
       size: 8,
       numberOfStrings: 1,
       useLowerCase: true,
@@ -83,7 +83,51 @@ class String extends React.Component {
     });
   };
 
-  generateString() {}
+  generateString() {
+    if (
+      !this.state.useLowerCase &&
+      !this.state.useUpperCase &&
+      !this.state.useNumbers &&
+      !this.state.useSymbols
+    ) {
+      alert("Please select at least one character set!");
+    }
+
+    var characterSet = [];
+    var i;
+
+    if (this.state.useLowerCase) {
+      for (i = 97; i < 123; i++) {
+        characterSet.push(String.fromCharCode(i));
+      }
+    }
+
+    if (this.state.useUpperCase) {
+      for (i = 65; i < 91; i++) {
+        characterSet.push(String.fromCharCode(i));
+      }
+    }
+
+    if (this.state.useNumbers) {
+      for (i = 48; i < 58; i++) {
+        characterSet.push(String.fromCharCode(i));
+      }
+    }
+
+    if (this.state.useSymbols) {
+      for (i = 33; i < 48; i++) {
+        characterSet.push(String.fromCharCode(i));
+      }
+    }
+
+    var newString = "";
+    for (i = 0; i < this.state.size; i++) {
+      let c = characterSet[Math.floor(Math.random() * characterSet.length)];
+      newString += c;
+    }
+
+    this.setState({ result: [newString] });
+  }
 
   render() {
     return (
@@ -94,7 +138,7 @@ class String extends React.Component {
         </p>
         <div className="result-container">
           <div className="result" id="result-string">
-            {this.state.result[0]}
+            <b>{this.state.result[0]}</b>
           </div>
         </div>
 
@@ -147,22 +191,25 @@ class String extends React.Component {
                   <Form.Check
                     label="use lower case (a-z)"
                     name="lowercase-checkbox"
-                    checked={true}
+                    checked={this.state.useLowerCase}
                     onChange={this.handleLowerChange}
                   />
                   <Form.Check
                     label="use upper case (A-Z)"
                     name="uppercase-checkbox"
+                    checked={this.state.useUpperCase}
                     onChange={this.handleUpperChange}
                   />
                   <Form.Check
                     label="use numbers (0-9)"
                     name="numbers-checkbox"
+                    checked={this.state.useNumbers}
                     onChange={this.handleNumbersChange}
                   />
                   <Form.Check
                     label="use symbols"
                     name="symbol-checkbox"
+                    checked={this.state.useSymbols}
                     onChange={this.handleSymbolChange}
                   />
                 </Col>
@@ -175,4 +222,4 @@ class String extends React.Component {
   }
 }
 
-export default String;
+export default StringGenerator;

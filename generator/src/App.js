@@ -4,12 +4,12 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Numbers from "./generator/numbers/numbers.jsx";
-import Colors from "./generator/colors/colors.jsx";
+import NumberGenerator from "./generator/numbers/numbers.jsx";
+import ColorGenerator from "./generator/colors/colors.jsx";
 import SequenceElement from "./generator/sequences/sequences-element.jsx";
 import SequenceRandomize from "./generator/sequences/sequences-randomize.jsx";
-import String from "./generator/words/string.jsx";
-import Name from "./generator/words/name.jsx";
+import StringGenerator from "./generator/words/string.jsx";
+import NameGenerator from "./generator/words/name.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -60,10 +60,10 @@ class App extends React.Component {
                 Last Updated: 5/22/2020 3:20 AM
               </Route>
               <Route path="/numbers">
-                <Numbers />
+                <NumberGenerator />
               </Route>
               <Route path="/colors">
-                <Colors />
+                <ColorGenerator />
               </Route>
               <Route path="/sequences/element">
                 <SequenceElement />
@@ -72,10 +72,10 @@ class App extends React.Component {
                 <SequenceRandomize />
               </Route>
               <Route path="/words/string">
-                <String />
+                <StringGenerator />
               </Route>
               <Route path="/words/name">
-                <Name />
+                <NameGenerator />
               </Route>
             </Switch>
           </Router>

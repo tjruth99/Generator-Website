@@ -117,7 +117,7 @@ class ColorDisplay extends React.Component {
   }
 }
 
-class Colors extends React.Component {
+class ColorGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -372,4 +372,4 @@ class Colors extends React.Component {
   }
 }
 
-export default Colors;
+export default ColorGenerator;

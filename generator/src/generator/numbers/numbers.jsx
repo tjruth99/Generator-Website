@@ -8,7 +8,7 @@ const MIN_VALUE = -10000000000;
 const MAX_VALUE = 10000000000;
 const MAX_DIGIT = 20;
 
-class Numbers extends React.Component {
+class NumberGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -260,4 +260,4 @@ class Numbers extends React.Component {
   }
 }
 
-export default Numbers;
+export default NumberGenerator;
