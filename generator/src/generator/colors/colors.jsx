@@ -2,10 +2,12 @@ import React from "react";
 
 import {
   Button,
+  Col,
   Collapse,
   Form,
   OverlayTrigger,
   Tooltip,
+  Row,
 } from "react-bootstrap";
 
 import "../generator.css";
@@ -338,21 +340,29 @@ class Colors extends React.Component {
         <div className="settings">
           <Collapse in={this.state.settingsShow}>
             <Form>
-              <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>Number of Colors to Generate:</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={this.state.size}
-                  onChange={this.handleSizeChange}
-                />
+              <Form.Group as={Row}>
+                <Form.Label column sm={3}>
+                  Number of Colors to Generate:
+                </Form.Label>
+                <Col>
+                  <Form.Control
+                    type="number"
+                    value={this.state.size}
+                    onChange={this.handleSizeChange}
+                  />
+                </Col>
               </Form.Group>
-              <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Palette Type:</Form.Label>
-                <Form.Control as="select" onChange={this.handlePaletteChange}>
-                  {paletteList.map((i) => (
-                    <option key={i}>{i}</option>
-                  ))}
-                </Form.Control>
+              <Form.Group as={Row}>
+                <Form.Label column sm={3}>
+                  Palette Type:
+                </Form.Label>
+                <Col>
+                  <Form.Control as="select" onChange={this.handlePaletteChange}>
+                    {paletteList.map((i) => (
+                      <option key={i}>{i}</option>
+                    ))}
+                  </Form.Control>
+                </Col>
               </Form.Group>
             </Form>
           </Collapse>

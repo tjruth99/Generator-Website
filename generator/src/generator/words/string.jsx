@@ -1,13 +1,22 @@
 import React from "react";
 
-import { Button, Collapse, Form } from "react-bootstrap";
+import { Button, Col, Collapse, Form, Row } from "react-bootstrap";
 
 import "../generator.css";
 
 class String extends React.Component {
   constructor() {
     super();
-    this.state = { settingsShow: false };
+    this.state = {
+      result: [""],
+      size: 8,
+      numberOfStrings: 1,
+      useLowerCase: true,
+      useUpperCase: false,
+      useNumbers: false,
+      useSymbols: false,
+      settingsShow: false,
+    };
   }
 
   setSettingsShow = (visibility) => {
@@ -43,7 +52,44 @@ class String extends React.Component {
         <br />
         <div className="settings">
           <Collapse in={this.state.settingsShow} fluid>
-            <Form></Form>
+            <Form>
+              <Form.Group as={Row}>
+                <Form.Label column sm={2}>
+                  Size of String:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="number" value="8" />
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row}>
+                <Form.Label column sm={2}>
+                  Number of Strings to Generate:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="number" value="1" />
+                </Col>
+              </Form.Group>
+              <hr />
+              <Form.Group as={Row}>
+                <Form.Label as="legend" column sm={2}></Form.Label>
+                <Col sm={10}>
+                  <Form.Check
+                    label="use lower case (a-z)"
+                    name="lowercase-checkbox"
+                  />
+                  <Form.Check
+                    label="use upper case (A-Z)"
+                    name="uppercase-checkbox"
+                  />
+                  <Form.Check
+                    label="use numbers (0-9)"
+                    name="numbers-checkbox"
+                  />
+                  <Form.Check label="use symbols" name="symbol-checkbox" />
+                </Col>
+              </Form.Group>
+            </Form>
           </Collapse>
         </div>
       </>

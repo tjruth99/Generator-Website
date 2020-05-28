@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Col, Collapse, Form, Modal } from "react-bootstrap";
+import { Button, Col, Collapse, Form, Modal, Row } from "react-bootstrap";
 
 import "../generator.css";
 
@@ -194,8 +194,10 @@ class Numbers extends React.Component {
         <div className="settings">
           <Collapse in={this.state.settingsShow} fluid>
             <Form>
-              <Form.Group>
-                <Form.Label>Min</Form.Label>
+              <Form.Group as={Row}>
+                <Form.Label column sm={1}>
+                  Min:
+                </Form.Label>
                 <Col>
                   <Form.Control
                     type="number"
@@ -204,29 +206,33 @@ class Numbers extends React.Component {
                   ></Form.Control>
                 </Col>
               </Form.Group>
-              <Form.Group>
-                <Form.Label>Max</Form.Label>
+              <Form.Group as={Row}>
+                <Form.Label column sm={1}>
+                  Max:
+                </Form.Label>
                 <Col>
                   <Form.Control
                     type="number"
                     value={this.state.max}
                     onChange={this.handleMaxChange}
-                  ></Form.Control>
+                  />
                 </Col>
               </Form.Group>
               <hr />
-              <Form.Group>
+              <Form.Group as={Row}>
+                <Form.Label column sm={3}>
+                  How many numbers to generate:
+                </Form.Label>
                 <Col>
-                  <Form.Label>How many numbers to generate</Form.Label>
                   <Form.Control
                     type="number"
                     value={this.state.size}
                     onChange={this.handleSizeChange}
-                  ></Form.Control>
+                  />
                 </Col>
               </Form.Group>
               <hr />
-              <Form.Group>
+              <Form.Group as={Row}>
                 <Col>
                   <Form.Check
                     type="checkbox"
@@ -234,12 +240,16 @@ class Numbers extends React.Component {
                     label="decimal?"
                     onChange={this.handleDecimalChange}
                   />
-                  <Form.Label>Number of digits to round to</Form.Label>
+                </Col>
+                <Form.Label column sm={4}>
+                  Number of digits to round to:
+                </Form.Label>
+                <Col>
                   <Form.Control
                     type="number"
                     value={this.state.digits}
                     onChange={this.handleDigitsChange}
-                  ></Form.Control>
+                  />
                 </Col>
               </Form.Group>
             </Form>
