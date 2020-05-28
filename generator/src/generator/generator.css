@@ -97,6 +97,11 @@
   animation-duration: 1s;
 }
 
+.result-string-animation {
+  animation-name: string-animate;
+  animation-duration: 1s;
+}
+
 @keyframes num-animate {
   from {
     opacity: 10%;
@@ -142,6 +147,15 @@
   100% {
     width: 150px;
     height: 150px;
+  }
+}
+
+@keyframes string-animate {
+  from {
+    opacity: 10%;
+  }
+  to {
+    opacity: 100%;
   }
 }
 

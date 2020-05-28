@@ -4,7 +4,8 @@ import { Button, Col, Collapse, Form, Modal, Row } from "react-bootstrap";
 
 import "../generator.css";
 
-const MAX_SIZE = 100;
+const MAX_CHARS = 30;
+const MAX_SIZE = 100000;
 
 class StringGenerator extends React.Component {
   constructor() {
@@ -18,14 +19,15 @@ class StringGenerator extends React.Component {
       useNumbers: false,
       useSymbols: false,
       multipleShow: false,
+      animate: false,
       settingsShow: false,
     };
   }
 
   handleSizeChange = (event) => {
     var newSize = parseInt(event.target.value);
-    if (newSize > MAX_SIZE) {
-      newSize = MAX_SIZE;
+    if (newSize > MAX_CHARS) {
+      newSize = MAX_CHARS;
     } else if (newSize < 1) {
       newSize = 1;
     }
@@ -37,7 +39,9 @@ class StringGenerator extends React.Component {
 
   handleNumberOfStringsChange = (event) => {
     var newNumber = parseInt(event.target.value);
-    if (newNumber < 1) {
+    if (newNumber > MAX_SIZE) {
+      newNumber = MAX_SIZE;
+    } else if (newNumber < 1) {
       newNumber = 1;
     }
 
@@ -147,6 +151,7 @@ class StringGenerator extends React.Component {
       this.setState({
         result: results,
         multipleShow: false,
+        animate: true,
       });
     }
   }
@@ -159,7 +164,13 @@ class StringGenerator extends React.Component {
           Generate a random string of characters. Can be used for passwords.
         </p>
         <div className="result-container">
-          <div className="result" id="result-string">
+          <div
+            className={
+              this.state.animate ? "result result-string-animation" : "result"
+            }
+            id="result-string"
+            onAnimationEnd={() => this.setState({ animate: false })}
+          >
             <b>{this.state.result[0]}</b>
           </div>
         </div>
