@@ -10,7 +10,11 @@ const listOfGenerators = [
     link: "/numbers",
     description: "Generate a set of numbers",
   },
-  { name: "Color", link: "/colors", description: "Generate a color palette" },
+  {
+    name: "Color",
+    link: "/colors",
+    description: "Generate a color palette",
+  },
   {
     name: "Element",
     link: "/sequences/element",
@@ -71,7 +75,7 @@ class HomePage extends React.Component {
           </CardColumns>
         </div>
         <br />
-        Last Updated: 5/22/2020 3:20 AM
+        Last Updated: 5/29/2020 1:52 AM
       </>
     );
   }

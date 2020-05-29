@@ -104,32 +104,32 @@
 
 @keyframes num-animate {
   from {
-    opacity: 10%;
+    color: #ffffff;
     margin-right: -50%;
   }
   to {
-    opacity: 100%;
+    color: black;
     margin-right: 0px;
   }
 }
 
 @keyframes num-prev-animate {
   from {
-    opacity: 0%;
+    color: #ffffff;
     margin-right: -50%;
   }
   to {
-    opacity: 50%;
+    color: #000000;
     margin-right: 0px;
   }
 }
 
 @keyframes color-animate-show {
-  0% {
+  from {
     width: 10px;
     height: 10px;
   }
-  100% {
+  to {
     width: 150px;
     height: 150px;
   }
@@ -152,10 +152,10 @@
 
 @keyframes string-animate {
   from {
-    opacity: 10%;
+    color: #ffffff;
   }
   to {
-    opacity: 100%;
+    color: #000000;
   }
 }
 
