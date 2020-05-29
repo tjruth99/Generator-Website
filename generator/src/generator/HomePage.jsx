@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card } from "react-bootstrap";
+import { Button, Card, CardColumns } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
@@ -42,9 +42,14 @@ const GeneratorCard = (input) => {
         <Card.Title>{item.name} Generator</Card.Title>
       </Card.Header>
       <Card.Body>{item.description}</Card.Body>
-      <Card.Footer as={Link} to={item.link} id="home-card-footer">
+      <Button
+        as={Link}
+        to={item.link}
+        variant="secondary"
+        id="home-card-footer"
+      >
         Goto Page
-      </Card.Footer>
+      </Button>
     </Card>
   );
 };
@@ -59,9 +64,11 @@ class HomePage extends React.Component {
     return (
       <>
         <div className="card-container">
-          {listOfGenerators.map((gen) => (
-            <GeneratorCard obj={gen} />
-          ))}
+          <CardColumns>
+            {listOfGenerators.map((gen) => (
+              <GeneratorCard obj={gen} />
+            ))}
+          </CardColumns>
         </div>
         <br />
         Last Updated: 5/22/2020 3:20 AM
