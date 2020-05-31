@@ -5,7 +5,7 @@ import { Button, Col, Collapse, Form, Modal, Row } from "react-bootstrap";
 import "../generator.css";
 
 const MAX_CHARS = 30;
-const MAX_SIZE = 100000;
+const MAX_SIZE = 100;
 
 class StringGenerator extends React.Component {
   constructor() {
