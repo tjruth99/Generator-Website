@@ -315,7 +315,7 @@ class ColorGenerator extends React.Component {
     return (
       <>
         <h1>Colors</h1>
-        <p>
+        <p className="description-text">
           Generate a random color or a color palette. Choose from different
           palettes to customize the feel. Hover over a color to see it's color
           code.

@@ -160,7 +160,7 @@ class StringGenerator extends React.Component {
     return (
       <>
         <h1>String</h1>
-        <p>
+        <p className="description-text">
           Generate a random string of characters. Can be used for passwords.
         </p>
         <div className="result-container">

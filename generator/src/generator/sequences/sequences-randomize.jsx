@@ -48,7 +48,7 @@ class SequencesRandomize extends React.Component {
     return (
       <>
         <h1>Randomize Sequence</h1>
-        <p>Randomize a list</p>
+        <p className="description-text">Randomize a list</p>
         <textarea
           className="sequences-input"
           value={this.state.input}

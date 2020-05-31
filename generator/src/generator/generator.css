@@ -30,20 +30,20 @@
   margin: 3px;
 }
 
-#colorNumResult {
-  font-size: 3em;
-}
-
 #result-numbers {
-  font-size: 6em;
+  font-size: 8vw;
 }
 
 #result-string {
-  font-size: 3em;
+  font-size: 8vw;
+  word-wrap: break-word;
+  width: 100%;
 }
 
 #result-element {
-  font-size: 5em;
+  font-size: 6vw;
+  word-wrap: break-word;
+  width: 100%;
 }
 
 .sequences-input {

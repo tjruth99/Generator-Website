@@ -37,7 +37,7 @@ class SequencesElement extends React.Component {
     return (
       <>
         <h1>Random Element</h1>
-        <p>
+        <p className="description-text">
           Give a list of words or phrases separated on a new line and hit
           generate to get a random element from the list
         </p>

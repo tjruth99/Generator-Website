@@ -28,7 +28,7 @@ class Template extends React.Component {
     return (
       <>
         <h1>Template</h1>
-        <p>
+        <p className="description-text">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur
           minus minima iusto architecto esse aperiam quod. Tempore, praesentium
           sed molestiae quasi facilis eveniet vero exercitationem laboriosam ea

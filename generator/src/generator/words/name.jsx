@@ -22,7 +22,7 @@ class Name extends React.Component {
     return (
       <>
         <h1>Name</h1>
-        <p>Generate a random name.</p>
+        <p className="description-text">Generate a random name.</p>
         <div className="result-container">
           <div className="result"></div>
         </div>
