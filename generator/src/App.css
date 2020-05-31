@@ -13,8 +13,6 @@
 }
 
 .home-card {
-  width: 300px;
-  height: 200px;
   margin: 5px;
   border-radius: 25px;
   color: #cccccc;
@@ -27,6 +25,7 @@
 
 #home-card-footer {
   text-decoration: none;
+  width: 100%;
 }
 
 @keyframes card-grow {
