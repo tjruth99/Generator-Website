@@ -67,15 +67,18 @@ class HomePage extends React.Component {
   render() {
     return (
       <>
+        <h1>Welcome to the Generator Website!</h1>
+        <p className="description-text">
+          Feel free to try out the various generators
+        </p>
         <div className="card-container">
           <CardColumns>
             {listOfGenerators.map((gen) => (
-              <GeneratorCard obj={gen} />
+              <GeneratorCard obj={gen} key={gen.name} />
             ))}
           </CardColumns>
         </div>
         <br />
-        Last Updated: 5/29/2020 1:52 AM
       </>
     );
   }

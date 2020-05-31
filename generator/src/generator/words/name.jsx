@@ -84,7 +84,7 @@ class Name extends React.Component {
             id="result-string"
             onAnimationEnd={() => this.setState({ animate: false })}
           >
-            {this.state.result[0]}
+            <b>{this.state.result[0]}</b>
           </div>
         </div>
 

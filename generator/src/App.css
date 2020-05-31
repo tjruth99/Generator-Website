@@ -15,9 +15,10 @@
 .home-card {
   width: 300px;
   height: 200px;
-  margin: 10px;
-  border-radius: 50px;
+  margin: 5px;
+  border-radius: 25px;
   color: #cccccc;
+  box-shadow: 3px 5px;
 }
 
 .home-card:hover {
@@ -34,5 +35,6 @@
   100% {
     color: #eeeeee;
     border-radius: 0px;
+    box-shadow: 5px 10px grey;
   }
 }
