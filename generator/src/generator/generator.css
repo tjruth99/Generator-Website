@@ -102,14 +102,15 @@
   animation-duration: 1s;
 }
 
+/* removing margin animation due to no previous result */
 @keyframes num-animate {
   from {
     color: #ffffff;
-    margin-right: -50%;
+    /*margin-right: -50%;*/
   }
   to {
     color: black;
-    margin-right: 0px;
+    /* margin-right: 0px; */
   }
 }
 

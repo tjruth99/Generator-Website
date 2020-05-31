@@ -142,6 +142,11 @@ class NumberGenerator extends React.Component {
           Get a series of random numbers within a range
         </p>
         <div className="result-container">
+          {/* 
+          This div holds the previously generated result. 
+          Removed because it was causing problems with mobile screens
+          Might fix in the future
+          
           <div
             className={
               this.state.animate
@@ -152,6 +157,8 @@ class NumberGenerator extends React.Component {
           >
             {this.state.prevResult}
           </div>
+          */}
+          <div className="result"></div>
           <div
             className={
               this.state.animate ? "result result-num-animation" : "result"
