@@ -102,57 +102,57 @@ class StringGenerator extends React.Component {
       !this.state.useSymbols
     ) {
       alert("Please select at least one character set!");
-    }
-
-    var characterSet = [],
-      i,
-      results = [];
-
-    if (this.state.useLowerCase) {
-      for (i = 97; i < 123; i++) {
-        characterSet.push(String.fromCharCode(i));
-      }
-    }
-
-    if (this.state.useUpperCase) {
-      for (i = 65; i < 91; i++) {
-        characterSet.push(String.fromCharCode(i));
-      }
-    }
-
-    if (this.state.useNumbers) {
-      for (i = 48; i < 58; i++) {
-        characterSet.push(String.fromCharCode(i));
-      }
-    }
-
-    if (this.state.useSymbols) {
-      for (i = 33; i < 48; i++) {
-        characterSet.push(String.fromCharCode(i));
-      }
-    }
-
-    for (i = 0; i < this.state.numberOfStrings; i++) {
-      var newString = "",
-        j;
-      for (j = 0; j < this.state.size; j++) {
-        let c = characterSet[Math.floor(Math.random() * characterSet.length)];
-        newString += c;
-      }
-      results[i] = newString;
-    }
-
-    if (this.state.numberOfStrings > 1) {
-      this.setState({
-        result: results,
-        multipleShow: true,
-      });
     } else {
-      this.setState({
-        result: results,
-        multipleShow: false,
-        animate: true,
-      });
+      var characterSet = [],
+        i,
+        results = [];
+
+      if (this.state.useLowerCase) {
+        for (i = 97; i < 123; i++) {
+          characterSet.push(String.fromCharCode(i));
+        }
+      }
+
+      if (this.state.useUpperCase) {
+        for (i = 65; i < 91; i++) {
+          characterSet.push(String.fromCharCode(i));
+        }
+      }
+
+      if (this.state.useNumbers) {
+        for (i = 48; i < 58; i++) {
+          characterSet.push(String.fromCharCode(i));
+        }
+      }
+
+      if (this.state.useSymbols) {
+        for (i = 33; i < 48; i++) {
+          characterSet.push(String.fromCharCode(i));
+        }
+      }
+
+      for (i = 0; i < this.state.numberOfStrings; i++) {
+        var newString = "",
+          j;
+        for (j = 0; j < this.state.size; j++) {
+          let c = characterSet[Math.floor(Math.random() * characterSet.length)];
+          newString += c;
+        }
+        results[i] = newString;
+      }
+
+      if (this.state.numberOfStrings > 1) {
+        this.setState({
+          result: results,
+          multipleShow: true,
+        });
+      } else {
+        this.setState({
+          result: results,
+          multipleShow: false,
+          animate: true,
+        });
+      }
     }
   }
 

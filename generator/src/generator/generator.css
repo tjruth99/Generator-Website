@@ -1,7 +1,11 @@
 .settings {
   text-align: left;
   margin: auto;
-  width: 45%;
+  width: 50%;
+}
+
+.description-text {
+  font-size: 1.5em;
 }
 
 .settings-button {
@@ -11,6 +15,37 @@
 
 .multiple-result {
   font-size: 2em;
+}
+
+.sequences-input {
+  width: 75%;
+  height: 200px;
+  overflow: auto;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: baseline;
+  width: 75%;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.result-previous {
+  flex: 1;
+  opacity: 50%;
+  text-align: center;
+  margin: 1em auto;
+  padding: 5px;
+}
+
+.result {
+  flex: 1;
+  text-align: center;
+  margin: 1em auto;
+  padding: 5px;
 }
 
 #tooltip-color {
@@ -48,44 +83,13 @@
   width: 100%;
 }
 
-.sequences-input {
-  width: 75%;
-  height: 200px;
-  overflow: auto;
-}
-
-.result-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: baseline;
-  width: 75%;
-  text-align: center;
-  margin: 10px auto;
-}
-
-.result-previous {
-  flex: 1;
-  opacity: 50%;
-  text-align: center;
-  margin: 1em auto;
-  padding: 5px;
+.result-num-animation {
+  animation-name: num-animate;
+  animation-duration: 1s;
 }
 
 .result-previous-animation {
   animation-name: num-prev-animate;
-  animation-duration: 1s;
-}
-
-.result {
-  flex: 1;
-  text-align: center;
-  margin: 1em auto;
-  padding: 5px;
-}
-
-.result-num-animation {
-  animation-name: num-animate;
   animation-duration: 1s;
 }
 
@@ -160,8 +164,4 @@
   to {
     color: #000000;
   }
-}
-
-.description-text {
-  font-size: 1.5em;
 }

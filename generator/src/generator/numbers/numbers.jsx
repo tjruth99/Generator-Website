@@ -6,7 +6,7 @@ import "../generator.css";
 
 const MIN_VALUE = -10000000000;
 const MAX_VALUE = 10000000000;
-const MAX_SIZE = 100000;
+const MAX_SIZE = 100;
 const MAX_DIGIT = 20;
 
 class NumberGenerator extends React.Component {

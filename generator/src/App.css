@@ -26,14 +26,27 @@
 #home-card-footer {
   text-decoration: none;
   width: 100%;
+  border-radius: 25px;
+}
+
+#home-card-footer:hover {
+  animation: button-grow 0.5s forwards;
 }
 
 @keyframes card-grow {
-  0% {
+  from {
   }
-  100% {
+  to {
     color: #eeeeee;
     border-radius: 0px;
     box-shadow: 5px 10px grey;
+  }
+}
+
+@keyframes button-grow {
+  from {
+  }
+  to {
+    border-radius: 0px;
   }
 }
