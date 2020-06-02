@@ -174,7 +174,12 @@ class NumberGenerator extends React.Component {
         <Button onClick={() => this.generateNum()}>Generate</Button>
         <br />
 
-        <Modal show={this.state.resultShow} size="lg" centered>
+        <Modal
+          show={this.state.resultShow}
+          onHide={this.handleClose}
+          size="lg"
+          centered
+        >
           <Modal.Header>
             <Modal.Title>Results:</Modal.Title>
           </Modal.Header>

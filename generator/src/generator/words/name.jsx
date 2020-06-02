@@ -91,7 +91,12 @@ class Name extends React.Component {
         <Button onClick={() => this.generateName()}>Generate</Button>
         <br />
 
-        <Modal show={this.state.multipleShow} size="lg" centered>
+        <Modal
+          show={this.state.multipleShow}
+          onHide={this.handleClose}
+          size="lg"
+          centered
+        >
           <Modal.Header>
             <Modal.Title>Results:</Modal.Title>
           </Modal.Header>

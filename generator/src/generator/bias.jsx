@@ -94,7 +94,7 @@ class Cell extends React.Component {
 class Bias extends React.Component {
   constructor() {
     super();
-    this.state = { bias: [] };
+    this.state = { bias: [], num: 0 };
   }
 
   componentDidMount = () => {
@@ -110,12 +110,21 @@ class Bias extends React.Component {
       b[i] = Math.random();
     }
 
-    this.setState({ bias: b });
+    this.setState({ bias: b, num: numOfBias });
   };
 
   render() {
     return (
       <>
+        <p>
+          Here are {this.state.num} randomly generated numbers to show if there
+          is any bias in the number generator
+        </p>
+        <p>Perfectly random numbers will show up as random noise</p>
+        <p>
+          Any noticeable pattern is evidence that the random function being used
+          is not totally random
+        </p>
         <div className="bias-container">
           {this.state.bias.map((o) => (
             <Cell value={o} />
