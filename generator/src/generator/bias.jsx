@@ -98,7 +98,8 @@ class Bias extends React.Component {
   }
 
   componentDidMount = () => {
-    let width = Math.ceil(window.innerWidth / 50);
+    console.log(window.innerWidth);
+    let width = Math.ceil(window.innerWidth / 25);
     let height = Math.ceil(window.innerHeight / 25);
 
     let numOfBias = width * height;

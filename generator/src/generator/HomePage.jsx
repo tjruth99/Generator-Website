@@ -88,10 +88,17 @@ const HomePage = () => {
         </CardColumns>
       </div>
       <br />
-      <Button onClick={() => setShowBias(true)}>Show Bias</Button>
+      <Button variant="secondary" onClick={() => setShowBias(true)}>
+        Show Bias
+      </Button>
       <br />
 
-      <Modal show={showBias} size="lg" centered>
+      <Modal
+        show={showBias}
+        onHide={() => setShowBias(false)}
+        size="lg"
+        centered
+      >
         <Modal.Header>
           <Modal.Title>Bias:</Modal.Title>
         </Modal.Header>
