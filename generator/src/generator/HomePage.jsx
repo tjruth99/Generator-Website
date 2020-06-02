@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Button, Card, CardColumns } from "react-bootstrap";
+import { Button, Card, CardColumns, Modal } from "react-bootstrap";
+
+import Bias from "./bias.jsx";
 
 import { Link } from "react-router-dom";
 
@@ -69,30 +71,41 @@ const GeneratorCard = (input) => {
   );
 };
 
-class HomePage extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+const HomePage = () => {
+  const [showBias, setShowBias] = useState(false);
 
-  render() {
-    return (
-      <>
-        <h1>Welcome to the Generator Website!</h1>
-        <p className="description-text">
-          Feel free to try out the various generators
-        </p>
-        <div className="card-container">
-          <CardColumns>
-            {listOfGenerators.map((gen) => (
-              <GeneratorCard obj={gen} key={gen.name} />
-            ))}
-          </CardColumns>
-        </div>
-        <br />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <h1>Welcome to the Generator Website!</h1>
+      <p className="description-text">
+        Feel free to try out the various generators
+      </p>
+      <div className="card-container">
+        <CardColumns>
+          {listOfGenerators.map((gen) => (
+            <GeneratorCard obj={gen} key={gen.name} />
+          ))}
+        </CardColumns>
+      </div>
+      <br />
+      <Button onClick={() => setShowBias(true)}>Show Bias</Button>
+      <br />
+
+      <Modal show={showBias} size="lg" centered>
+        <Modal.Header>
+          <Modal.Title>Bias:</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Bias />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => setShowBias(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 
 export default HomePage;
