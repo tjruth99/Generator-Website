@@ -11,6 +11,7 @@ import SequenceElement from "./generator/sequences/sequences-element.jsx";
 import SequenceRandomize from "./generator/sequences/sequences-randomize.jsx";
 import StringGenerator from "./generator/words/string.jsx";
 import NameGenerator from "./generator/words/name.jsx";
+import ChordGenerator from "./generator/music/chords.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -50,6 +51,9 @@ class App extends React.Component {
                       Random Name
                     </NavDropdown.Item>
                   </NavDropdown>
+                  <Nav.Link as={Link} to="/music">
+                    Chords
+                  </Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
@@ -75,6 +79,9 @@ class App extends React.Component {
               </Route>
               <Route path="/words/name">
                 <NameGenerator />
+              </Route>
+              <Route path="/music">
+                <ChordGenerator />
               </Route>
             </Switch>
           </Router>
