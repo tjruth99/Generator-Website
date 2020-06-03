@@ -21,11 +21,16 @@ const notes = [
 
 const MAX_SIZE = 12;
 
+const maj_scale_steps = [2, 2, 1, 2, 2, 2];
+const min_scale_steps = [2, 1, 2, 2, 1, 2];
+const maj_chords = ["maj", "min", "min", "maj", "maj", "min", "dim"];
+const min_chords = ["min", "dim", "maj", "min", "min", "maj", "maj"];
+
 class ChordGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
-      result: [],
+      result: "Press Generate",
       key: 0,
       major: true,
       size: 4,
@@ -45,6 +50,17 @@ class ChordGenerator extends React.Component {
       size: newSize,
     });
   };
+
+  scale_tone_to_note(key, scaleTone) {
+    let arr = this.state.major ? maj_scale_steps : min_scale_steps;
+    let sum = 0;
+
+    for (let i = 0; i < scaleTone; i++) {
+      sum += arr[i];
+    }
+
+    return (key + sum) % 12;
+  }
 
   handleTonalityChange = (event) => {
     let isMajor = event.target.value === "Major";
@@ -71,7 +87,38 @@ class ChordGenerator extends React.Component {
     });
   };
 
-  generateChords() {}
+  generateChords() {
+    let progression = "";
+    if (this.state.major) {
+      for (let i = 0; i < this.state.size; i++) {
+        let scaleTone = Math.floor(Math.random() * 7);
+        let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
+        let chord = notes[chordRoot] + maj_chords[scaleTone];
+
+        if (i !== this.state.size - 1) {
+          progression = progression.concat(chord, ", ");
+        } else {
+          progression = progression.concat(chord);
+        }
+      }
+    } else {
+      for (let i = 0; i < this.state.size; i++) {
+        let scaleTone = Math.floor(Math.random() * 7);
+        let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
+        let chord = notes[chordRoot] + min_chords[scaleTone];
+
+        if (i !== this.state.size - 1) {
+          progression = progression.concat(chord, ", ");
+        } else {
+          progression = progression.concat(chord);
+        }
+      }
+    }
+
+    this.setState({
+      result: progression,
+    });
+  }
 
   render() {
     return (
@@ -79,11 +126,9 @@ class ChordGenerator extends React.Component {
         <h1>Chord Progression</h1>
         <p className="description-text">Generate a random chord progression.</p>
         <div className="result-container">
-          <div className="result">{this.state.result}</div>
-        </div>
-
-        <div>
-          State: <br /> {this.state.major ? "True" : "False"}
+          <div className="result" id="result-string">
+            <b>{this.state.result}</b>
+          </div>
         </div>
 
         <Button onClick={() => this.generateChords()}>Generate</Button>
