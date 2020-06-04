@@ -35,6 +35,7 @@ class ChordGenerator extends React.Component {
       major: true,
       size: 4,
       settingsShow: false,
+      animate: false,
     };
   }
 
@@ -117,6 +118,7 @@ class ChordGenerator extends React.Component {
 
     this.setState({
       result: progression,
+      animate: true,
     });
   }
 
@@ -126,7 +128,13 @@ class ChordGenerator extends React.Component {
         <h1>Chord Progression</h1>
         <p className="description-text">Generate a random chord progression.</p>
         <div className="result-container">
-          <div className="result" id="result-string">
+          <div
+            className={
+              this.state.animate ? "result result-string-animation" : "result"
+            }
+            id="result-string"
+            onAnimationEnd={() => this.setState({ animate: false })}
+          >
             <b>{this.state.result}</b>
           </div>
         </div>

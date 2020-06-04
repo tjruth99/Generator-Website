@@ -43,6 +43,12 @@ const listOfGenerators = [
     icon: "\u{1F603}",
     description: "Generate a name",
   },
+  {
+    name: "Chord Progression",
+    link: "/music",
+    icon: "\u{1F3B5}",
+    description: "Generate a random chord progression in any key",
+  },
 ];
 
 const GeneratorCard = (input) => {
