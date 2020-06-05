@@ -26,11 +26,93 @@ const min_scale_steps = [2, 1, 2, 2, 1, 2];
 const maj_chords = ["maj", "min", "min", "maj", "maj", "min", "dim"];
 const min_chords = ["min", "dim", "maj", "min", "min", "maj", "maj"];
 
+class ChordDisplay extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      root: 0,
+      tonality: 0,
+      name: "",
+      notesInChord: [],
+      is7th: false,
+    };
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      root: this.props.info.root,
+      tonality: this.props.info.tonality,
+      name: this.props.info.name,
+    });
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.info !== this.props.info) {
+      this.setState({
+        root: this.props.info.root,
+        tonality: this.props.info.tonality,
+        name: this.props.info.name,
+      });
+    }
+  }
+
+  getMajorNotes(root, is7th) {
+    let arr = [];
+
+    arr[0] = root;
+    arr[1] = (root + 4) % 12;
+    arr[2] = (root + 7) % 12;
+
+    if (is7th) {
+      arr[4] = (root + 11) % 12;
+    }
+
+    return arr;
+  }
+
+  getMinorNotes(root, is7th) {
+    let arr = [];
+
+    arr[0] = root;
+    arr[1] = (root + 3) % 12;
+    arr[2] = (root + 7) % 12;
+
+    if (is7th) {
+      arr[4] = (root + 10) % 12;
+    }
+
+    return arr;
+  }
+
+  getDiminishedNotes(root, is7th) {
+    let arr = [];
+
+    arr[0] = root;
+    arr[1] = (root + 3) % 12;
+    arr[2] = (root + 6) % 12;
+
+    if (is7th) {
+      arr[4] = (root + 9) % 12;
+    }
+
+    return arr;
+  }
+
+  render() {
+    return (
+      <>
+        <div id="result-chord">{this.state.name}</div>
+      </>
+    );
+  }
+}
+
 class ChordGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
       result: "Press Generate",
+      progression: [],
       key: 0,
       major: true,
       size: 4,
@@ -89,18 +171,14 @@ class ChordGenerator extends React.Component {
   };
 
   generateChords() {
-    let progression = "";
+    let objects = [];
     if (this.state.major) {
       for (let i = 0; i < this.state.size; i++) {
         let scaleTone = Math.floor(Math.random() * 7);
         let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
         let chord = notes[chordRoot] + maj_chords[scaleTone];
 
-        if (i !== this.state.size - 1) {
-          progression = progression.concat(chord, ", ");
-        } else {
-          progression = progression.concat(chord);
-        }
+        objects.push({ root: chordRoot, tonality: 0, name: chord });
       }
     } else {
       for (let i = 0; i < this.state.size; i++) {
@@ -108,16 +186,14 @@ class ChordGenerator extends React.Component {
         let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
         let chord = notes[chordRoot] + min_chords[scaleTone];
 
-        if (i !== this.state.size - 1) {
-          progression = progression.concat(chord, ", ");
-        } else {
-          progression = progression.concat(chord);
-        }
+        objects = objects.push({ root: chordRoot, tonality: 1, name: chord });
       }
     }
 
+    console.log(objects);
+
     this.setState({
-      result: progression,
+      progression: objects,
       animate: true,
     });
   }
@@ -135,7 +211,9 @@ class ChordGenerator extends React.Component {
             id="result-string"
             onAnimationEnd={() => this.setState({ animate: false })}
           >
-            <b>{this.state.result}</b>
+            {this.state.progression.map((i) => (
+              <ChordDisplay info={i} />
+            ))}
           </div>
         </div>
 
