@@ -1,6 +1,14 @@
 import React from "react";
 
-import { Button, Col, Collapse, Form, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Collapse,
+  Form,
+  Row,
+  Tooltip,
+  OverlayTrigger,
+} from "react-bootstrap";
 
 import "../generator.css";
 
@@ -33,27 +41,60 @@ class ChordDisplay extends React.Component {
       root: 0,
       tonality: 0,
       name: "",
-      notesInChord: [],
+      notesInChord: "",
       is7th: false,
     };
   }
 
-  componentDidMount = () => {
+  updateState() {
+    let crdRoot = this.props.info.root,
+      crdTonality = this.props.info.tonality,
+      crdName = this.props.info.name;
+
+    let arr = [];
+    switch (crdTonality) {
+      case 0: // major
+        arr = this.getMajorNotes(crdRoot, false);
+        break;
+      case 1: // minor
+        arr = this.getMinorNotes(crdRoot, false);
+        break;
+      case 2: // diminished
+        arr = this.getDiminishedNotes(crdRoot, false);
+        break;
+      default:
+        arr = this.getMajorNotes(crdRoot, false);
+    }
+
+    let noteString = "";
+
+    arr.map((n) => (noteString = noteString.concat(n, ", ")));
+    noteString = noteString.slice(0, noteString.length - 2);
+
     this.setState({
-      root: this.props.info.root,
-      tonality: this.props.info.tonality,
-      name: this.props.info.name,
+      root: crdRoot,
+      tonality: crdTonality,
+      name: crdName,
+      notesInChord: noteString,
     });
+  }
+
+  componentDidMount = () => {
+    this.updateState();
   };
 
   componentDidUpdate(prevProps) {
     if (prevProps.info !== this.props.info) {
-      this.setState({
-        root: this.props.info.root,
-        tonality: this.props.info.tonality,
-        name: this.props.info.name,
-      });
+      this.updateState();
     }
+  }
+
+  convertNoteToString(noteArr) {
+    let a = [];
+    let i = 0;
+    noteArr.forEach((n) => (a[i++] = notes[n]));
+
+    return a;
   }
 
   getMajorNotes(root, is7th) {
@@ -67,7 +108,7 @@ class ChordDisplay extends React.Component {
       arr[4] = (root + 11) % 12;
     }
 
-    return arr;
+    return this.convertNoteToString(arr);
   }
 
   getMinorNotes(root, is7th) {
@@ -81,7 +122,7 @@ class ChordDisplay extends React.Component {
       arr[4] = (root + 10) % 12;
     }
 
-    return arr;
+    return this.convertNoteToString(arr);
   }
 
   getDiminishedNotes(root, is7th) {
@@ -95,13 +136,24 @@ class ChordDisplay extends React.Component {
       arr[4] = (root + 9) % 12;
     }
 
-    return arr;
+    return this.convertNoteToString(arr);
   }
 
   render() {
     return (
       <>
-        <div id="result-chord">{this.state.name}</div>
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 100, hide: 500 }}
+          overlay={
+            <Tooltip id="tooltip-chord">
+              Notes in chord: <br />
+              {this.state.notesInChord}
+            </Tooltip>
+          }
+        >
+          <div id="result-chord">{this.state.name}</div>
+        </OverlayTrigger>
       </>
     );
   }
@@ -176,21 +228,45 @@ class ChordGenerator extends React.Component {
       for (let i = 0; i < this.state.size; i++) {
         let scaleTone = Math.floor(Math.random() * 7);
         let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
-        let chord = notes[chordRoot] + maj_chords[scaleTone];
+        let chord = notes[chordRoot] + " " + maj_chords[scaleTone];
+        let tone = 0;
 
-        objects.push({ root: chordRoot, tonality: 0, name: chord });
+        if (maj_chords[scaleTone] === "maj") {
+          tone = 0;
+        } else if (maj_chords[scaleTone] === "min") {
+          tone = 1;
+        } else {
+          tone = 2;
+        }
+
+        objects.push({
+          root: chordRoot,
+          tonality: tone,
+          name: chord,
+        });
       }
     } else {
       for (let i = 0; i < this.state.size; i++) {
         let scaleTone = Math.floor(Math.random() * 7);
         let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
-        let chord = notes[chordRoot] + min_chords[scaleTone];
+        let chord = notes[chordRoot] + " " + min_chords[scaleTone];
+        let tone = 0;
 
-        objects = objects.push({ root: chordRoot, tonality: 1, name: chord });
+        if (min_chords[scaleTone] === "maj") {
+          tone = 0;
+        } else if (min_chords[scaleTone] === "min") {
+          tone = 1;
+        } else {
+          tone = 2;
+        }
+
+        objects.push({
+          root: chordRoot,
+          tonality: tone,
+          name: chord,
+        });
       }
     }
-
-    console.log(objects);
 
     this.setState({
       progression: objects,
