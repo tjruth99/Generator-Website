@@ -43,6 +43,8 @@ class ChordDisplay extends React.Component {
       name: "",
       notesInChord: "",
       is7th: false,
+      show: true,
+      animate: false,
     };
   }
 
@@ -86,6 +88,7 @@ class ChordDisplay extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.info !== this.props.info) {
       this.updateState();
+      this.setState({ animate: true });
     }
   }
 
@@ -152,7 +155,21 @@ class ChordDisplay extends React.Component {
             </Tooltip>
           }
         >
-          <div id="result-chord">{this.state.name}</div>
+          <div
+            id="result-chord"
+            className={
+              this.state.show
+                ? "result-chord-animation-show"
+                : this.state.animate
+                ? "result-chord-animation-change"
+                : ""
+            }
+            onAnimationEnd={() =>
+              this.setState({ show: false, animate: false })
+            }
+          >
+            {this.state.name}
+          </div>
         </OverlayTrigger>
       </>
     );
@@ -280,13 +297,7 @@ class ChordGenerator extends React.Component {
         <h1>Chord Progression</h1>
         <p className="description-text">Generate a random chord progression.</p>
         <div className="result-container">
-          <div
-            className={
-              this.state.animate ? "result result-string-animation" : "result"
-            }
-            id="result-string"
-            onAnimationEnd={() => this.setState({ animate: false })}
-          >
+          <div>
             {this.state.progression.map((i) => (
               <ChordDisplay info={i} />
             ))}
