@@ -51,8 +51,10 @@ class ChordDisplay extends React.Component {
   updateState() {
     let crdRoot = this.props.info.root,
       crdTonality = this.props.info.tonality,
-      crdName = this.props.info.name;
+      crdName = this.props.info.name,
+      seventh = this.props.seventh;
 
+    console.log("seven", seventh);
     let arr = [];
     switch (crdTonality) {
       case 0: // major
@@ -71,6 +73,7 @@ class ChordDisplay extends React.Component {
     let noteString = "";
 
     arr.map((n) => (noteString = noteString.concat(n, ", ")));
+    console.log(noteString);
     noteString = noteString.slice(0, noteString.length - 2);
 
     this.setState({
@@ -78,6 +81,7 @@ class ChordDisplay extends React.Component {
       tonality: crdTonality,
       name: crdName,
       notesInChord: noteString,
+      is7th: seventh ? true : false,
     });
   }
 
@@ -107,8 +111,8 @@ class ChordDisplay extends React.Component {
     arr[1] = (root + 4) % 12;
     arr[2] = (root + 7) % 12;
 
-    if (is7th) {
-      arr[4] = (root + 11) % 12;
+    if (this.state.is7th) {
+      arr[3] = (root + 11) % 12;
     }
 
     return this.convertNoteToString(arr);
@@ -121,8 +125,8 @@ class ChordDisplay extends React.Component {
     arr[1] = (root + 3) % 12;
     arr[2] = (root + 7) % 12;
 
-    if (is7th) {
-      arr[4] = (root + 10) % 12;
+    if (this.state.is7th) {
+      arr[3] = (root + 10) % 12;
     }
 
     return this.convertNoteToString(arr);
@@ -135,8 +139,8 @@ class ChordDisplay extends React.Component {
     arr[1] = (root + 3) % 12;
     arr[2] = (root + 6) % 12;
 
-    if (is7th) {
-      arr[4] = (root + 9) % 12;
+    if (this.state.is7th) {
+      arr[3] = (root + 9) % 12;
     }
 
     return this.convertNoteToString(arr);
@@ -181,10 +185,11 @@ class ChordGenerator extends React.Component {
     super();
     this.state = {
       result: "Press Generate",
-      progression: [],
+      progression: [{ root: 0, tonality: 0, name: "Press Generate" }],
       key: 0,
       major: true,
       size: 4,
+      seventh: false,
       settingsShow: false,
       animate: false,
     };
@@ -233,6 +238,14 @@ class ChordGenerator extends React.Component {
     });
   };
 
+  handleSeventhChange = (event) => {
+    this.setState((prev) => {
+      return {
+        seventh: !prev.seventh,
+      };
+    });
+  };
+
   setSettingsShow = (visibility) => {
     this.setState({
       settingsShow: visibility,
@@ -246,6 +259,7 @@ class ChordGenerator extends React.Component {
         let scaleTone = Math.floor(Math.random() * 7);
         let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
         let chord = notes[chordRoot] + " " + maj_chords[scaleTone];
+        chord = this.state.seventh ? chord + "7" : chord;
         let tone = 0;
 
         if (maj_chords[scaleTone] === "maj") {
@@ -267,6 +281,7 @@ class ChordGenerator extends React.Component {
         let scaleTone = Math.floor(Math.random() * 7);
         let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
         let chord = notes[chordRoot] + " " + min_chords[scaleTone];
+        chord = this.state.seventh ? chord + "7" : chord;
         let tone = 0;
 
         if (min_chords[scaleTone] === "maj") {
@@ -299,7 +314,7 @@ class ChordGenerator extends React.Component {
         <div className="result-container">
           <div>
             {this.state.progression.map((i) => (
-              <ChordDisplay info={i} />
+              <ChordDisplay info={i} seventh={this.state.seventh} />
             ))}
           </div>
         </div>
@@ -354,6 +369,19 @@ class ChordGenerator extends React.Component {
                     type="number"
                     value={this.state.size}
                     onChange={this.handleSizeChange}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row}>
+                <Form.Label column sm={3}>
+                  Generate Seventh Chords?
+                </Form.Label>
+                <Col>
+                  <Form.Check
+                    type="checkbox"
+                    id="seventh-checkbox"
+                    label=""
+                    onChange={this.handleSeventhChange}
                   />
                 </Col>
               </Form.Group>
