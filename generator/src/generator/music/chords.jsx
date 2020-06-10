@@ -34,6 +34,13 @@ const min_scale_steps = [2, 1, 2, 2, 1, 2];
 const maj_chords = ["maj", "min", "min", "maj", "maj", "min", "dim"];
 const min_chords = ["min", "dim", "maj", "min", "min", "maj", "maj"];
 
+const maj_penta_steps = [2, 2, 3, 2];
+const min_penta_steps = [3, 2, 2, 3];
+const maj_penta_chords = ["maj", "min", "min", "maj", "min"];
+const min_penta_chords = ["min", "maj", "min", "min", "maj"];
+
+const scale_list = ["7-note scale", "Pentatonic Scale"];
+
 class ChordDisplay extends React.Component {
   constructor() {
     super();
@@ -190,6 +197,7 @@ class ChordGenerator extends React.Component {
       major: true,
       size: 4,
       seventh: false,
+      pentatonic: false,
       settingsShow: false,
       animate: false,
     };
@@ -208,8 +216,27 @@ class ChordGenerator extends React.Component {
     });
   };
 
+  handleScaleChange = (event) => {
+    let selected = event.target.value;
+
+    this.setState({
+      pentatonic: selected === scale_list[1] ? true : false,
+    });
+  };
+
   scale_tone_to_note(key, scaleTone) {
     let arr = this.state.major ? maj_scale_steps : min_scale_steps;
+    let sum = 0;
+
+    for (let i = 0; i < scaleTone; i++) {
+      sum += arr[i];
+    }
+
+    return (key + sum) % 12;
+  }
+
+  scale_tone_to_note_pentatonic(key, scaleTone) {
+    let arr = this.state.major ? maj_penta_steps : min_penta_steps;
     let sum = 0;
 
     for (let i = 0; i < scaleTone; i++) {
@@ -252,8 +279,8 @@ class ChordGenerator extends React.Component {
     });
   };
 
-  generateChords() {
-    let objects = [];
+  getChords() {
+    let chords = [];
     if (this.state.major) {
       for (let i = 0; i < this.state.size; i++) {
         let scaleTone = Math.floor(Math.random() * 7);
@@ -270,7 +297,7 @@ class ChordGenerator extends React.Component {
           tone = 2;
         }
 
-        objects.push({
+        chords.push({
           root: chordRoot,
           tonality: tone,
           name: chord,
@@ -292,7 +319,7 @@ class ChordGenerator extends React.Component {
           tone = 2;
         }
 
-        objects.push({
+        chords.push({
           root: chordRoot,
           tonality: tone,
           name: chord,
@@ -300,8 +327,73 @@ class ChordGenerator extends React.Component {
       }
     }
 
+    return chords;
+  }
+
+  getChordsPentatonic() {
+    let chords = [];
+    if (this.state.major) {
+      for (let i = 0; i < this.state.size; i++) {
+        let scaleTone = Math.floor(Math.random() * 5);
+        let chordRoot = this.scale_tone_to_note_pentatonic(
+          this.state.key,
+          scaleTone
+        );
+        let chord = notes[chordRoot] + " " + maj_penta_chords[scaleTone];
+        chord = this.state.seventh ? chord + "7" : chord;
+        let tone = 0;
+
+        if (maj_chords[scaleTone] === "maj") {
+          tone = 0;
+        } else if (maj_chords[scaleTone] === "min") {
+          tone = 1;
+        } else {
+          tone = 2;
+        }
+
+        chords.push({
+          root: chordRoot,
+          tonality: tone,
+          name: chord,
+        });
+      }
+    } else {
+      for (let i = 0; i < this.state.size; i++) {
+        let scaleTone = Math.floor(Math.random() * 5);
+        let chordRoot = this.scale_tone_to_note_pentatonic(
+          this.state.key,
+          scaleTone
+        );
+        let chord = notes[chordRoot] + " " + min_penta_chords[scaleTone];
+        chord = this.state.seventh ? chord + "7" : chord;
+        let tone = 0;
+
+        if (min_chords[scaleTone] === "maj") {
+          tone = 0;
+        } else if (min_chords[scaleTone] === "min") {
+          tone = 1;
+        } else {
+          tone = 2;
+        }
+
+        chords.push({
+          root: chordRoot,
+          tonality: tone,
+          name: chord,
+        });
+      }
+    }
+
+    return chords;
+  }
+
+  generateChords() {
+    let chords = this.state.pentatonic
+      ? this.getChordsPentatonic()
+      : this.getChords();
+
     this.setState({
-      progression: objects,
+      progression: chords,
       animate: true,
     });
   }
@@ -309,7 +401,9 @@ class ChordGenerator extends React.Component {
   render() {
     return (
       <>
-        <h1>Chord Progression</h1>
+        <h1>
+          Chord Progression {this.state.pentatonic ? <p>true</p> : <p>false</p>}
+        </h1>
         <p className="description-text">Generate a random chord progression.</p>
         <div className="result-container">
           <div>
@@ -370,6 +464,18 @@ class ChordGenerator extends React.Component {
                     value={this.state.size}
                     onChange={this.handleSizeChange}
                   />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row}>
+                <Form.Label column sm={3}>
+                  Generate from scale type:
+                </Form.Label>
+                <Col>
+                  <Form.Control as="select" onChange={this.handleScaleChange}>
+                    {scale_list.map((i) => (
+                      <option key={i}>{i}</option>
+                    ))}
+                  </Form.Control>
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>
