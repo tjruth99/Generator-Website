@@ -23,8 +23,6 @@ const min_penta_steps = [3, 2, 2, 3];
 const maj_penta_chords = ["maj", "min", "min", "maj", "min"];
 const min_penta_chords = ["min", "maj", "min", "min", "maj"];
 
-const scale_list = ["7-note scale", "Pentatonic Scale"];
-
 function scale_tone_to_note(key, scaleTone, isMajor) {
   let arr = isMajor ? maj_scale_steps : min_scale_steps;
   let sum = 0;
@@ -103,11 +101,7 @@ export function getChordsPentatonic(isMajor, size, key, seventh) {
   if (isMajor) {
     for (let i = 0; i < size; i++) {
       let scaleTone = Math.floor(Math.random() * 5);
-      let chordRoot = this.scale_tone_to_note_pentatonic(
-        key,
-        scaleTone,
-        isMajor
-      );
+      let chordRoot = scale_tone_to_note_pentatonic(key, scaleTone, isMajor);
       let chord = notes[chordRoot] + " " + maj_penta_chords[scaleTone];
       chord = seventh ? chord + "7" : chord;
       let tone = 0;
@@ -129,11 +123,7 @@ export function getChordsPentatonic(isMajor, size, key, seventh) {
   } else {
     for (let i = 0; i < size; i++) {
       let scaleTone = Math.floor(Math.random() * 5);
-      let chordRoot = this.scale_tone_to_note_pentatonic(
-        key,
-        scaleTone,
-        isMajor
-      );
+      let chordRoot = scale_tone_to_note_pentatonic(key, scaleTone, isMajor);
       let chord = notes[chordRoot] + " " + min_penta_chords[scaleTone];
       chord = seventh ? chord + "7" : chord;
       let tone = 0;
