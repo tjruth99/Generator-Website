@@ -1,14 +1,10 @@
 import React from "react";
 
-import {
-  Button,
-  Col,
-  Collapse,
-  Form,
-  Row,
-  Tooltip,
-  OverlayTrigger,
-} from "react-bootstrap";
+import { Button, Col, Collapse, Form, Row } from "react-bootstrap";
+
+import ChordDisplay from "./ChordDisplay.jsx";
+
+import * as music from "./music_functions.js";
 
 import "../generator.css";
 
@@ -29,163 +25,7 @@ const notes = [
 
 const MAX_SIZE = 12;
 
-const maj_scale_steps = [2, 2, 1, 2, 2, 2];
-const min_scale_steps = [2, 1, 2, 2, 1, 2];
-const maj_chords = ["maj", "min", "min", "maj", "maj", "min", "dim"];
-const min_chords = ["min", "dim", "maj", "min", "min", "maj", "maj"];
-
-const maj_penta_steps = [2, 2, 3, 2];
-const min_penta_steps = [3, 2, 2, 3];
-const maj_penta_chords = ["maj", "min", "min", "maj", "min"];
-const min_penta_chords = ["min", "maj", "min", "min", "maj"];
-
 const scale_list = ["7-note scale", "Pentatonic Scale"];
-
-class ChordDisplay extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      root: 0,
-      tonality: 0,
-      name: "",
-      notesInChord: "",
-      is7th: false,
-      show: true,
-      animate: false,
-    };
-  }
-
-  updateState() {
-    let crdRoot = this.props.info.root,
-      crdTonality = this.props.info.tonality,
-      crdName = this.props.info.name,
-      seventh = this.props.seventh;
-
-    console.log("seven", seventh);
-    let arr = [];
-    switch (crdTonality) {
-      case 0: // major
-        arr = this.getMajorNotes(crdRoot, false);
-        break;
-      case 1: // minor
-        arr = this.getMinorNotes(crdRoot, false);
-        break;
-      case 2: // diminished
-        arr = this.getDiminishedNotes(crdRoot, false);
-        break;
-      default:
-        arr = this.getMajorNotes(crdRoot, false);
-    }
-
-    let noteString = "";
-
-    arr.map((n) => (noteString = noteString.concat(n, ", ")));
-    console.log(noteString);
-    noteString = noteString.slice(0, noteString.length - 2);
-
-    this.setState({
-      root: crdRoot,
-      tonality: crdTonality,
-      name: crdName,
-      notesInChord: noteString,
-      is7th: seventh ? true : false,
-    });
-  }
-
-  componentDidMount = () => {
-    this.updateState();
-  };
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.info !== this.props.info) {
-      this.updateState();
-      this.setState({ animate: true });
-    }
-  }
-
-  convertNoteToString(noteArr) {
-    let a = [];
-    let i = 0;
-    noteArr.forEach((n) => (a[i++] = notes[n]));
-
-    return a;
-  }
-
-  getMajorNotes(root, is7th) {
-    let arr = [];
-
-    arr[0] = root;
-    arr[1] = (root + 4) % 12;
-    arr[2] = (root + 7) % 12;
-
-    if (this.state.is7th) {
-      arr[3] = (root + 11) % 12;
-    }
-
-    return this.convertNoteToString(arr);
-  }
-
-  getMinorNotes(root, is7th) {
-    let arr = [];
-
-    arr[0] = root;
-    arr[1] = (root + 3) % 12;
-    arr[2] = (root + 7) % 12;
-
-    if (this.state.is7th) {
-      arr[3] = (root + 10) % 12;
-    }
-
-    return this.convertNoteToString(arr);
-  }
-
-  getDiminishedNotes(root, is7th) {
-    let arr = [];
-
-    arr[0] = root;
-    arr[1] = (root + 3) % 12;
-    arr[2] = (root + 6) % 12;
-
-    if (this.state.is7th) {
-      arr[3] = (root + 9) % 12;
-    }
-
-    return this.convertNoteToString(arr);
-  }
-
-  render() {
-    return (
-      <>
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 100, hide: 500 }}
-          overlay={
-            <Tooltip id="tooltip-chord">
-              Notes in chord: <br />
-              {this.state.notesInChord}
-            </Tooltip>
-          }
-        >
-          <div
-            id="result-chord"
-            className={
-              this.state.show
-                ? "result-chord-animation-show"
-                : this.state.animate
-                ? "result-chord-animation-change"
-                : ""
-            }
-            onAnimationEnd={() =>
-              this.setState({ show: false, animate: false })
-            }
-          >
-            {this.state.name}
-          </div>
-        </OverlayTrigger>
-      </>
-    );
-  }
-}
 
 class ChordGenerator extends React.Component {
   constructor() {
@@ -224,28 +64,6 @@ class ChordGenerator extends React.Component {
     });
   };
 
-  scale_tone_to_note(key, scaleTone) {
-    let arr = this.state.major ? maj_scale_steps : min_scale_steps;
-    let sum = 0;
-
-    for (let i = 0; i < scaleTone; i++) {
-      sum += arr[i];
-    }
-
-    return (key + sum) % 12;
-  }
-
-  scale_tone_to_note_pentatonic(key, scaleTone) {
-    let arr = this.state.major ? maj_penta_steps : min_penta_steps;
-    let sum = 0;
-
-    for (let i = 0; i < scaleTone; i++) {
-      sum += arr[i];
-    }
-
-    return (key + sum) % 12;
-  }
-
   handleTonalityChange = (event) => {
     let isMajor = event.target.value === "Major";
     this.setState({ major: isMajor });
@@ -279,118 +97,20 @@ class ChordGenerator extends React.Component {
     });
   };
 
-  getChords() {
-    let chords = [];
-    if (this.state.major) {
-      for (let i = 0; i < this.state.size; i++) {
-        let scaleTone = Math.floor(Math.random() * 7);
-        let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
-        let chord = notes[chordRoot] + " " + maj_chords[scaleTone];
-        chord = this.state.seventh ? chord + "7" : chord;
-        let tone = 0;
-
-        if (maj_chords[scaleTone] === "maj") {
-          tone = 0;
-        } else if (maj_chords[scaleTone] === "min") {
-          tone = 1;
-        } else {
-          tone = 2;
-        }
-
-        chords.push({
-          root: chordRoot,
-          tonality: tone,
-          name: chord,
-        });
-      }
-    } else {
-      for (let i = 0; i < this.state.size; i++) {
-        let scaleTone = Math.floor(Math.random() * 7);
-        let chordRoot = this.scale_tone_to_note(this.state.key, scaleTone);
-        let chord = notes[chordRoot] + " " + min_chords[scaleTone];
-        chord = this.state.seventh ? chord + "7" : chord;
-        let tone = 0;
-
-        if (min_chords[scaleTone] === "maj") {
-          tone = 0;
-        } else if (min_chords[scaleTone] === "min") {
-          tone = 1;
-        } else {
-          tone = 2;
-        }
-
-        chords.push({
-          root: chordRoot,
-          tonality: tone,
-          name: chord,
-        });
-      }
-    }
-
-    return chords;
-  }
-
-  getChordsPentatonic() {
-    let chords = [];
-    if (this.state.major) {
-      for (let i = 0; i < this.state.size; i++) {
-        let scaleTone = Math.floor(Math.random() * 5);
-        let chordRoot = this.scale_tone_to_note_pentatonic(
-          this.state.key,
-          scaleTone
-        );
-        let chord = notes[chordRoot] + " " + maj_penta_chords[scaleTone];
-        chord = this.state.seventh ? chord + "7" : chord;
-        let tone = 0;
-
-        if (maj_chords[scaleTone] === "maj") {
-          tone = 0;
-        } else if (maj_chords[scaleTone] === "min") {
-          tone = 1;
-        } else {
-          tone = 2;
-        }
-
-        chords.push({
-          root: chordRoot,
-          tonality: tone,
-          name: chord,
-        });
-      }
-    } else {
-      for (let i = 0; i < this.state.size; i++) {
-        let scaleTone = Math.floor(Math.random() * 5);
-        let chordRoot = this.scale_tone_to_note_pentatonic(
-          this.state.key,
-          scaleTone
-        );
-        let chord = notes[chordRoot] + " " + min_penta_chords[scaleTone];
-        chord = this.state.seventh ? chord + "7" : chord;
-        let tone = 0;
-
-        if (min_chords[scaleTone] === "maj") {
-          tone = 0;
-        } else if (min_chords[scaleTone] === "min") {
-          tone = 1;
-        } else {
-          tone = 2;
-        }
-
-        chords.push({
-          root: chordRoot,
-          tonality: tone,
-          name: chord,
-        });
-      }
-    }
-
-    return chords;
-  }
-
   generateChords() {
     let chords = this.state.pentatonic
-      ? this.getChordsPentatonic()
-      : this.getChords();
+      ? music.getChordsPentatonic(
+          this.state.major,
+          this.state.size,
+          this.state.key,
+          this.state.seventh
+        )
+      : music.getChords(
+          this.state.major,
+          this.state.size,
+          this.state.key,
+          this.state.seventh
+        );
 
     this.setState({
       progression: chords,
@@ -401,9 +121,7 @@ class ChordGenerator extends React.Component {
   render() {
     return (
       <>
-        <h1>
-          Chord Progression {this.state.pentatonic ? <p>true</p> : <p>false</p>}
-        </h1>
+        <h1>Chord Progression</h1>
         <p className="description-text">Generate a random chord progression.</p>
         <div className="result-container">
           <div>
