@@ -4,14 +4,14 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import HomePage from "./generator/HomePage";
-import NumberGenerator from "./generator/numbers/numbers.jsx";
-import ColorGenerator from "./generator/colors/colors.jsx";
-import SequenceElement from "./generator/sequences/sequences-element.jsx";
-import SequenceRandomize from "./generator/sequences/sequences-randomize.jsx";
-import StringGenerator from "./generator/words/string.jsx";
-import NameGenerator from "./generator/words/name.jsx";
-import ChordGenerator from "./generator/music/chords.jsx";
+import HomePage from "./generator/HomePage.jsx";
+import NumberGenerator from "./generator/numbers/NumberGenerator.jsx";
+import ColorGenerator from "./generator/colors/ColorGenerator.jsx";
+import SequenceElement from "./generator/sequences/SequencesElement.jsx";
+import SequenceRandomize from "./generator/sequences/SequencesRandomize.jsx";
+import StringGenerator from "./generator/words/StringGenerator.jsx";
+import NameGenerator from "./generator/words/NameGenerator.jsx";
+import ChordGenerator from "./generator/music/ChordGenerator.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";

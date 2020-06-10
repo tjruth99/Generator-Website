@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Button, Card, CardColumns, Modal } from "react-bootstrap";
 
-import Bias from "./bias.jsx";
+import Bias from "./Bias.jsx";
 
 import { Link } from "react-router-dom";
 

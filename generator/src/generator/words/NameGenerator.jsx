@@ -12,7 +12,7 @@ let lastNames = [];
 
 const MAX_SIZE = 100;
 
-class Name extends React.Component {
+class NameGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -74,7 +74,7 @@ class Name extends React.Component {
   render() {
     return (
       <>
-        <h1>Name</h1>
+        <h1>Name Generator</h1>
         <p className="description-text">Generate a random name.</p>
         <div className="result-container">
           <div
@@ -146,4 +146,4 @@ class Name extends React.Component {
   }
 }
 
-export default Name;
+export default NameGenerator;
