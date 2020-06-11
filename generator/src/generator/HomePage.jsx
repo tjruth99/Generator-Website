@@ -55,7 +55,14 @@ const GeneratorCard = (input) => {
   let item = input.obj;
 
   return (
-    <Card className="home-card" border="secondary" bg="dark">
+    <Card
+      as={Link}
+      to={item.link}
+      style={{ textDecoration: "none" }}
+      className="home-card"
+      border="secondary"
+      bg="dark"
+    >
       <Card.Header>
         <Card.Title>
           {item.name} Generator{" "}
@@ -65,12 +72,7 @@ const GeneratorCard = (input) => {
         </Card.Title>
       </Card.Header>
       <Card.Body>{item.description}</Card.Body>
-      <Button
-        as={Link}
-        to={item.link}
-        variant="secondary"
-        id="home-card-footer"
-      >
+      <Button variant="secondary" id="home-card-footer">
         Goto Page
       </Button>
     </Card>
