@@ -12,6 +12,7 @@ import SequenceRandomize from "./generator/sequences/SequencesRandomize.jsx";
 import StringGenerator from "./generator/words/StringGenerator.jsx";
 import NameGenerator from "./generator/words/NameGenerator.jsx";
 import ChordGenerator from "./generator/music/ChordGenerator.jsx";
+import DungeonGenerator from "./generator/maps/DungeonGenerator.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -82,6 +83,9 @@ class App extends React.Component {
               </Route>
               <Route path="/music">
                 <ChordGenerator />
+              </Route>
+              <Route path="/map">
+                <DungeonGenerator />
               </Route>
             </Switch>
           </Router>
