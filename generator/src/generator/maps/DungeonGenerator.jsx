@@ -1,14 +1,27 @@
 import React from "react";
 
-import { Button, Collapse, Form } from "react-bootstrap";
+import { Button, Collapse, Form, Row, Col } from "react-bootstrap";
 
 import "../generator.css";
 
 class DungeonGenerator extends React.Component {
   constructor() {
     super();
-    this.state = { image: null, settingsShow: false };
+    this.state = { image: null, cells: 5, settingsShow: false };
   }
+
+  handleCellsChange = (event) => {
+    var newCells = parseInt(event.target.value);
+    if (newCells < 2) {
+      newCells = 2;
+    } else if (newCells > 15) {
+      newCells = 15;
+    }
+
+    this.setState({
+      cells: newCells,
+    });
+  };
 
   setSettingsShow = (visibility) => {
     this.setState({
@@ -16,7 +29,8 @@ class DungeonGenerator extends React.Component {
     });
   };
 
-  generateTemplate() {
+  generateDungeon() {
+    let cellsToGenerate = this.state.cells;
     fetch("http://127.0.0.1:5000/dungeon", {
       method: "POST",
       headers: {
@@ -25,7 +39,7 @@ class DungeonGenerator extends React.Component {
         mode: "cors",
       },
       body: JSON.stringify({
-        cells: 5,
+        cells: cellsToGenerate,
       }),
     })
       .then((response) => {
@@ -45,10 +59,14 @@ class DungeonGenerator extends React.Component {
         <h1>Dungeon Generator</h1>
         <p className="description-text">Get a random dungeon map</p>
         <div className="result-container">
-          <img src={this.state.image} alt="map" />
+          {this.state.image === null ? (
+            <div id="result-string">Press Generate</div>
+          ) : (
+            <img src={this.state.image} alt="map" id="result-image" />
+          )}
         </div>
 
-        <Button onClick={() => this.generateTemplate()}>Generate</Button>
+        <Button onClick={() => this.generateDungeon()}>Generate</Button>
         <br />
 
         <Button
@@ -62,7 +80,20 @@ class DungeonGenerator extends React.Component {
         <br />
         <div className="settings">
           <Collapse in={this.state.settingsShow} fluid>
-            <Form></Form>
+            <Form>
+              <Form.Group as={Row}>
+                <Form.Label column sm={2}>
+                  Size of dungeon:
+                </Form.Label>
+                <Col>
+                  <Form.Control
+                    type="number"
+                    value={this.state.cells}
+                    onChange={this.handleCellsChange}
+                  />
+                </Col>
+              </Form.Group>
+            </Form>
           </Collapse>
         </div>
       </>

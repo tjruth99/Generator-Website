@@ -93,6 +93,13 @@
   width: 100%;
 }
 
+#result-image {
+  width: 30rem;
+  border: 1px black solid;
+  margin: 5vh;
+  box-shadow: 5px 5px #ccc;
+}
+
 .result-num-animation {
   animation-name: num-animate;
   animation-duration: 1s;

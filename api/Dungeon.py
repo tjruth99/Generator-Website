@@ -6,12 +6,14 @@ from PIL import Image
 # Generate a random dungeon in the style of binding of issac / original legend of zelda
 #   n - size of map
 #   maxRooms - maximum number of rooms to draw
+
+
 def generateClassicDungeon(n, maxRooms):
-    # Check to make sure maxRooms isn't larger than map size 
+    # Check to make sure maxRooms isn't larger than map size
     if(maxRooms < 2 or maxRooms >= n**2):
         return
 
-    map = numpy.zeros((n,n), dtype=int)
+    map = numpy.zeros((n, n), dtype=int)
 
     #  Arrays to hold values to make paths branch from each direction of the starting node
     ax = [1, -1, 0, 0]
@@ -26,7 +28,7 @@ def generateClassicDungeon(n, maxRooms):
 
     for i in range(4):
         if roomsDrawn == maxRooms:
-                break
+            break
 
         # Have 4 different tunnels that start from each side of the starting node
         x = int(n/2) + ax[i]
@@ -41,7 +43,7 @@ def generateClassicDungeon(n, maxRooms):
                 roomsDrawn += 1
 
             # Random Walk Algorithm
-            val = random.randint(1,4)
+            val = random.randint(1, 4)
             if (val == 1 and x < n):
                 x = x + 1
             elif (val == 2 and x > 0):
@@ -59,12 +61,14 @@ def generateClassicDungeon(n, maxRooms):
 # Generate a classic dungeon in a more simplistic way
 #   n - size of map
 #   numRooms - number of rooms to generate
+
+
 def generateClassicDungeonSnake(n, numRooms):
-    # Check to make sure the numRooms isn't larger than map size 
-    if( numRooms < 0 or numRooms >= n**2):
+    # Check to make sure the numRooms isn't larger than map size
+    if(numRooms < 0 or numRooms >= n**2):
         return
 
-    map = numpy.zeros((n,n), dtype=int)
+    map = numpy.zeros((n, n), dtype=int)
 
     x = int(n/2)
     y = int(n/2)
@@ -75,9 +79,9 @@ def generateClassicDungeonSnake(n, numRooms):
             if map[x][y] == 0:
                 map[x][y] = 1
                 numRooms = numRooms - 1
-            
+
         # Random Walk
-        val = random.randint(1,4)
+        val = random.randint(1, 4)
         if (val == 1 and x < n):
             x = x + 1
         elif (val == 2 and x > 0):
@@ -99,22 +103,24 @@ def generateDungeon(cells):
     n = cells * 30
     maxRoomSizeDim = int(n/cells)-5
     minRoomSizeDim = 10
-    
+
     # stores the start and end coordinates of each room
     rooms = []
 
     # ignore some rooms to give dungeon a more varied look, not always a grid
     ignoreRoomPercent = 25
 
-    map = numpy.zeros((n,n), dtype=int)
+    map = numpy.zeros((n, n), dtype=int)
 
     for i in range(cells):
         for j in range(cells):
             lenX = random.randint(minRoomSizeDim, maxRoomSizeDim)
             lenY = random.randint(minRoomSizeDim, maxRoomSizeDim)
 
-            startX = int(((n/cells) * i) + random.randint(0, int(n/cells) - lenX))
-            startY = int(((n/cells) * j) + random.randint(0, int(n/cells) - lenY))
+            startX = int(((n/cells) * i) +
+                         random.randint(0, int(n/cells) - lenX))
+            startY = int(((n/cells) * j) +
+                         random.randint(0, int(n/cells) - lenY))
 
             # Decides to draw the room or not
             ignore = random.randint(0, 100)
@@ -142,6 +148,8 @@ def generateDungeon(cells):
     return Image.fromarray(data)
 
 # Draw the path to each room using minimum spanning tree
+
+
 def drawPath(map, rooms):
     connectedRooms = [0]
     listOfEdges = []
@@ -155,7 +163,7 @@ def drawPath(map, rooms):
         minNode = []
         minValue = 999999
 
-        # Go through each edge to find the minimum 
+        # Go through each edge to find the minimum
         for j in listOfEdges:
             # Check to make sure the node does not connect two rooms already inside the list
             if(not (j[1] in connectedRooms and j[2] in connectedRooms)):
@@ -170,7 +178,7 @@ def drawPath(map, rooms):
             distances = getDistanceToEachRoom(minNode[1], rooms)
             for j in distances:
                 listOfEdges.append(j)
-            
+
         if(not minNode[2] in connectedRooms):
             connectedRooms.append(minNode[2])
             distances = getDistanceToEachRoom(minNode[2], rooms)
@@ -182,6 +190,8 @@ def drawPath(map, rooms):
     pass
 
 # Take the index of a room and give a list of the distances to each of the other rooms in the dungeon
+
+
 def getDistanceToEachRoom(index, rooms):
     curRoom = rooms[index]
 
@@ -199,7 +209,7 @@ def getDistanceToEachRoom(index, rooms):
         targetY = int((targetRoom[1] + targetRoom[3]) / 2)
 
         # Get the distance
-        d= int(math.sqrt((targetX - curX)**2 + (targetY - curY)**2))
+        d = int(math.sqrt((targetX - curX)**2 + (targetY - curY)**2))
 
         # Ignore distances of 0
         if(i != index):
@@ -209,6 +219,8 @@ def getDistanceToEachRoom(index, rooms):
     return distances
 
 # Draw a hallway between two rooms
+
+
 def drawHallway(map, fromRoom, toRoom):
     # get the starting coordinates for the hallway from the middle of the room
     startX = int((fromRoom[0] + fromRoom[2]) / 2)
@@ -222,7 +234,7 @@ def drawHallway(map, fromRoom, toRoom):
     if(endX > startX):
         for j in range(startX, endX):
             map[j][startY] = 1
-    else: 
+    else:
         for j in range(endX, startX):
             map[j][startY] = 1
 
@@ -230,23 +242,24 @@ def drawHallway(map, fromRoom, toRoom):
     if(endY > startY):
         for j in range(startY, endY):
             map[endX-1][j] = 1
-    else: 
+    else:
         for j in range(endY, startY):
             map[endX-1][j] = 1
 
-            
+
 def getColor(map):
     n = int(map.size**(1/2.0))
-    data = numpy.zeros( (n,n,3), dtype=numpy.uint8 )
-    
+    data = numpy.zeros((n, n, 3), dtype=numpy.uint8)
+
     for i in range(n):
         for j in range(n):
             if map[i][j] == 0:
-                data[i][j] = [0,0,0]
+                data[i][j] = [0, 0, 0]
             else:
                 data[i][j] = [255, 255, 255]
 
     return data
+
 
 def printArray(map):
     n = (map.size**(1/2.0))
@@ -254,4 +267,3 @@ def printArray(map):
         for j in range(n):
             print(map[i][j], end=" ")
         print()
-
