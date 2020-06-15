@@ -43,12 +43,10 @@ class DungeonGenerator extends React.Component {
       }),
     })
       .then((response) => {
-        console.log(response);
         return response.blob();
       })
       .then((data) => {
         let imgUrl = URL.createObjectURL(data);
-        console.log(imgUrl);
         this.setState({ image: imgUrl });
       })
       .catch((error) => {
