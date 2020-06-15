@@ -26,3 +26,4 @@ api/env/
 api/__pycache__
 
 api/__pycache__/app.cpython-38.pyc
+.vscode/settings.json

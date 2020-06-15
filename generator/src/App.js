@@ -13,6 +13,7 @@ import StringGenerator from "./generator/words/StringGenerator.jsx";
 import NameGenerator from "./generator/words/NameGenerator.jsx";
 import ChordGenerator from "./generator/music/ChordGenerator.jsx";
 import DungeonGenerator from "./generator/maps/DungeonGenerator.jsx";
+import MapGenerator from "./generator/maps/MapGenerator.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -84,8 +85,11 @@ class App extends React.Component {
               <Route path="/music">
                 <ChordGenerator />
               </Route>
-              <Route path="/map">
+              <Route path="/dungeon">
                 <DungeonGenerator />
+              </Route>
+              <Route path="/map">
+                <MapGenerator />
               </Route>
             </Switch>
           </Router>

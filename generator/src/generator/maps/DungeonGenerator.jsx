@@ -50,6 +50,10 @@ class DungeonGenerator extends React.Component {
         let imgUrl = URL.createObjectURL(data);
         console.log(imgUrl);
         this.setState({ image: imgUrl });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Server Timeout");
       });
   }
 
