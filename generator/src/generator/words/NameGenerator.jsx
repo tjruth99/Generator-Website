@@ -16,7 +16,7 @@ class NameGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
-      result: ["Generate Name"],
+      result: ["Press Generate"],
       size: 1,
       animate: false,
       multipleShow: false,
@@ -84,7 +84,7 @@ class NameGenerator extends React.Component {
             id="result-string"
             onAnimationEnd={() => this.setState({ animate: false })}
           >
-            <b>{this.state.result[0]}</b>
+            {this.state.result[0]}
           </div>
         </div>
 

@@ -165,7 +165,9 @@ class MapGenerator extends React.Component {
         </p>
         <div className="result-container">
           {this.state.image === null ? (
-            <div id="result-string">Press Generate</div>
+            <div className="result" id="result-string">
+              Press Generate
+            </div>
           ) : (
             <img src={this.state.image} alt="map" id="result-image" />
           )}

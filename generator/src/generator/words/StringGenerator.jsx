@@ -171,7 +171,7 @@ class StringGenerator extends React.Component {
             id="result-string"
             onAnimationEnd={() => this.setState({ animate: false })}
           >
-            <b>{this.state.result[0]}</b>
+            {this.state.result[0]}
           </div>
         </div>
 

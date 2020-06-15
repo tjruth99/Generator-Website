@@ -49,6 +49,18 @@ const listOfGenerators = [
     icon: "\u{1F3B5}",
     description: "Generate a random chord progression in any key",
   },
+  {
+    name: "Topological Map",
+    link: "/map",
+    icon: "\u{1F5FA}",
+    description: "Generate a random topological map",
+  },
+  {
+    name: "Dungeon",
+    link: "/dungeon",
+    icon: "\u{1F480}",
+    description: "Generate a random dungeon for RPGs",
+  },
 ];
 
 const GeneratorCard = (input) => {

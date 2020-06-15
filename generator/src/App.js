@@ -56,6 +56,14 @@ class App extends React.Component {
                   <Nav.Link as={Link} to="/music">
                     Chords
                   </Nav.Link>
+                  <NavDropdown title="Maps" id="maps-dropdown">
+                    <NavDropdown.Item as={Link} to="/map">
+                      Topological Map
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/dungeon">
+                      Dungeon
+                    </NavDropdown.Item>
+                  </NavDropdown>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
@@ -85,11 +93,11 @@ class App extends React.Component {
               <Route path="/music">
                 <ChordGenerator />
               </Route>
-              <Route path="/dungeon">
-                <DungeonGenerator />
-              </Route>
               <Route path="/map">
                 <MapGenerator />
+              </Route>
+              <Route path="/dungeon">
+                <DungeonGenerator />
               </Route>
             </Switch>
           </Router>
