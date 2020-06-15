@@ -163,15 +163,17 @@ class StringGenerator extends React.Component {
         <p className="description-text">
           Generate a random string of characters. Can be used for passwords.
         </p>
-        <div className="result-container">
-          <div
-            className={
-              this.state.animate ? "result result-string-animation" : "result"
-            }
-            id="result-string"
-            onAnimationEnd={() => this.setState({ animate: false })}
-          >
-            {this.state.result[0]}
+        <div className="result-background">
+          <div className="result-container">
+            <div
+              className={
+                this.state.animate ? "result result-string-animation" : "result"
+              }
+              id="result-string"
+              onAnimationEnd={() => this.setState({ animate: false })}
+            >
+              {this.state.result[0]}
+            </div>
           </div>
         </div>
 

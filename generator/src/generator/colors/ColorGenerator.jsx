@@ -124,11 +124,13 @@ class ColorGenerator extends React.Component {
           code.
         </p>
 
-        <div className="result-container">
-          <div className="result">
-            {this.state.colors.map((item) => (
-              <ColorDisplay hex={item} />
-            ))}
+        <div className="result-background">
+          <div className="result-container">
+            <div className="result">
+              {this.state.colors.map((item) => (
+                <ColorDisplay hex={item} />
+              ))}
+            </div>
           </div>
         </div>
 

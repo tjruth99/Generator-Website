@@ -41,20 +41,22 @@ class SequencesElement extends React.Component {
           Give a list of words or phrases separated on a new line and hit
           generate to get a random element from the list
         </p>
-        <textarea
-          className="sequences-input"
-          value={this.state.input}
-          onChange={this.handleInput}
-          wrap="off"
-          placeholder="Enter list here"
-        ></textarea>
-        <div className="result-container">
-          <br />
-          <Collapse in={this.state.resultShow} fluid>
-            <div className="result" id="result-element">
-              Result: <b>{this.state.result}</b>
-            </div>
-          </Collapse>
+        <div className="result-background">
+          <textarea
+            className="sequences-input"
+            value={this.state.input}
+            onChange={this.handleInput}
+            wrap="off"
+            placeholder="Enter list here"
+          ></textarea>
+          <div className="result-container">
+            <br />
+            <Collapse in={this.state.resultShow} fluid>
+              <div className="result" id="result-element">
+                Result: <b>{this.state.result}</b>
+              </div>
+            </Collapse>
+          </div>
         </div>
         <Button onClick={() => this.getRandomElement()}>Generate</Button>
         <br />

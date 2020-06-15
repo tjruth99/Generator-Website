@@ -60,14 +60,16 @@ class DungeonGenerator extends React.Component {
       <>
         <h1>Dungeon Generator</h1>
         <p className="description-text">Get a random dungeon map</p>
-        <div className="result-container">
-          {this.state.image === null ? (
-            <div className="result" id="result-string">
-              Press Generate
-            </div>
-          ) : (
-            <img src={this.state.image} alt="map" id="result-image" />
-          )}
+        <div className="result-background">
+          <div className="result-container">
+            {this.state.image === null ? (
+              <div className="result" id="result-string">
+                Press Generate
+              </div>
+            ) : (
+              <img src={this.state.image} alt="map" id="result-image" />
+            )}
+          </div>
         </div>
 
         <Button onClick={() => this.generateDungeon()}>Generate</Button>

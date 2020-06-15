@@ -76,15 +76,17 @@ class NameGenerator extends React.Component {
       <>
         <h1>Name Generator</h1>
         <p className="description-text">Generate a random name.</p>
-        <div className="result-container">
-          <div
-            className={
-              this.state.animate ? "result result-string-animation" : "result"
-            }
-            id="result-string"
-            onAnimationEnd={() => this.setState({ animate: false })}
-          >
-            {this.state.result[0]}
+        <div className="result-background">
+          <div className="result-container">
+            <div
+              className={
+                this.state.animate ? "result result-string-animation" : "result"
+              }
+              id="result-string"
+              onAnimationEnd={() => this.setState({ animate: false })}
+            >
+              {this.state.result[0]}
+            </div>
           </div>
         </div>
 

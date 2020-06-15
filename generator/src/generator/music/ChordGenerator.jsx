@@ -123,11 +123,13 @@ class ChordGenerator extends React.Component {
       <>
         <h1>Chord Progression</h1>
         <p className="description-text">Generate a random chord progression.</p>
-        <div className="result-container">
-          <div>
-            {this.state.progression.map((i) => (
-              <ChordDisplay info={i} seventh={this.state.seventh} />
-            ))}
+        <div className="result-background">
+          <div className="result-container">
+            <div>
+              {this.state.progression.map((i) => (
+                <ChordDisplay info={i} seventh={this.state.seventh} />
+              ))}
+            </div>
           </div>
         </div>
 

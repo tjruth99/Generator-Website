@@ -1,7 +1,15 @@
 .settings {
   text-align: left;
   margin: auto;
-  width: 50%;
+  width: 75%;
+  padding: 5px;
+}
+
+Form {
+  padding: 5px;
+  margin: 5px;
+  background-image: linear-gradient(to bottom right, #b9bfc6, #abb3ba);
+  border: 1px solid #505050;
 }
 
 .description-text {
@@ -23,6 +31,13 @@
   overflow: auto;
 }
 
+.result-background {
+  border: 1px solid #505050;
+  padding: 5px;
+  margin-bottom: 2vh;
+  background-image: linear-gradient(to bottom right, #e3e6e8, #b9bfc6);
+}
+
 .result-container {
   display: flex;
   flex-direction: row;
@@ -30,7 +45,7 @@
   align-items: baseline;
   width: 75%;
   text-align: center;
-  margin: 10px auto;
+  margin: 50px auto;
 }
 
 .result-previous {
@@ -89,7 +104,7 @@
 }
 
 #result-element {
-  font-size: 6vw;
+  font-size: 8vh;
   word-wrap: break-word;
   width: 100%;
 }
@@ -98,7 +113,7 @@
   width: 30rem;
   border: 1px black solid;
   margin: 5vh;
-  box-shadow: 5px 5px #ccc;
+  box-shadow: 5px 5px #999999;
 }
 
 .result-num-animation {

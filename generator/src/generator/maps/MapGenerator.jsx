@@ -163,14 +163,16 @@ class MapGenerator extends React.Component {
           a smooth transition between different elevations, or a random walk
           which generates more variable continents
         </p>
-        <div className="result-container">
-          {this.state.image === null ? (
-            <div className="result" id="result-string">
-              Press Generate
-            </div>
-          ) : (
-            <img src={this.state.image} alt="map" id="result-image" />
-          )}
+        <div className="result-background">
+          <div className="result-container">
+            {this.state.image === null ? (
+              <div className="result" id="result-string">
+                Press Generate
+              </div>
+            ) : (
+              <img src={this.state.image} alt="map" id="result-image" />
+            )}
+          </div>
         </div>
 
         <Button onClick={() => this.generateMap()}>Generate</Button>
