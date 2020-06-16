@@ -4,16 +4,16 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import HomePage from "./generator/HomePage.jsx";
-import NumberGenerator from "./generator/numbers/NumberGenerator.jsx";
-import ColorGenerator from "./generator/colors/ColorGenerator.jsx";
-import SequenceElement from "./generator/sequences/SequencesElement.jsx";
-import SequenceRandomize from "./generator/sequences/SequencesRandomize.jsx";
-import StringGenerator from "./generator/words/StringGenerator.jsx";
-import NameGenerator from "./generator/words/NameGenerator.jsx";
-import ChordGenerator from "./generator/music/ChordGenerator.jsx";
-import DungeonGenerator from "./generator/maps/DungeonGenerator.jsx";
-import MapGenerator from "./generator/maps/MapGenerator.jsx";
+import HomePage from "./components/HomePage.jsx";
+import NumberGenerator from "./components/numbers/NumberGenerator.jsx";
+import ColorGenerator from "./components/colors/ColorGenerator.jsx";
+import SequenceElement from "./components/sequences/SequencesElement.jsx";
+import SequenceRandomize from "./components/sequences/SequencesRandomize.jsx";
+import StringGenerator from "./components/words/StringGenerator.jsx";
+import NameGenerator from "./components/words/NameGenerator.jsx";
+import ChordGenerator from "./components/music/ChordGenerator.jsx";
+import DungeonGenerator from "./components/maps/DungeonGenerator.jsx";
+import MapGenerator from "./components/maps/MapGenerator.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
