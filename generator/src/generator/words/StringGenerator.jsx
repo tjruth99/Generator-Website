@@ -200,7 +200,13 @@ class StringGenerator extends React.Component {
           </Modal.Footer>
         </Modal>
 
-        <Button onClick={() => this.generateString()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.generateString()}
+        >
+          Generate
+        </Button>
         <br />
 
         <Button

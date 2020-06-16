@@ -59,7 +59,13 @@ class SequencesRandomize extends React.Component {
           ></textarea>
         </div>
         <br />
-        <Button onClick={() => this.randomizeSequence()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.randomizeSequence()}
+        >
+          Generate
+        </Button>
         <br />
       </>
     );

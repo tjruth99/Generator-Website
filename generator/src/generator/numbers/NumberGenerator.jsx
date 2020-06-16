@@ -173,7 +173,13 @@ class NumberGenerator extends React.Component {
           </div>
         </div>
 
-        <Button onClick={() => this.generateNum()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.generateNum()}
+        >
+          Generate
+        </Button>
         <br />
 
         <Modal

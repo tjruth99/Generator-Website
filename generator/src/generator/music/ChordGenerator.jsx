@@ -133,7 +133,13 @@ class ChordGenerator extends React.Component {
           </div>
         </div>
 
-        <Button onClick={() => this.generateChords()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.generateChords()}
+        >
+          Generate
+        </Button>
         <br />
 
         <Button

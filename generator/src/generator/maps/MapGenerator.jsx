@@ -175,7 +175,13 @@ class MapGenerator extends React.Component {
           </div>
         </div>
 
-        <Button onClick={() => this.generateMap()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.generateMap()}
+        >
+          Generate
+        </Button>
         <br />
 
         <Button

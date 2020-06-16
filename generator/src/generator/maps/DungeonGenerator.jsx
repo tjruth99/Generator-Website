@@ -72,7 +72,13 @@ class DungeonGenerator extends React.Component {
           </div>
         </div>
 
-        <Button onClick={() => this.generateDungeon()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.generateDungeon()}
+        >
+          Generate
+        </Button>
         <br />
 
         <Button

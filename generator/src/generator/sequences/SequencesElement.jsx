@@ -58,7 +58,13 @@ class SequencesElement extends React.Component {
             </Collapse>
           </div>
         </div>
-        <Button onClick={() => this.getRandomElement()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.getRandomElement()}
+        >
+          Generate
+        </Button>
         <br />
       </>
     );

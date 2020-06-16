@@ -90,7 +90,13 @@ class NameGenerator extends React.Component {
           </div>
         </div>
 
-        <Button onClick={() => this.generateName()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.generateName()}
+        >
+          Generate
+        </Button>
         <br />
 
         <Modal
@@ -129,10 +135,10 @@ class NameGenerator extends React.Component {
           <Collapse in={this.state.settingsShow} fluid>
             <Form>
               <Form.Group as={Row}>
-                <Form.Label column sm={2}>
+                <Form.Label column sm={3}>
                   Number of Names to Generate:
                 </Form.Label>
-                <Col sm={10}>
+                <Col sm={8}>
                   <Form.Control
                     type="number"
                     value={this.state.size}

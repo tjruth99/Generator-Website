@@ -134,7 +134,13 @@ class ColorGenerator extends React.Component {
           </div>
         </div>
 
-        <Button onClick={() => this.generateColor()}>Generate</Button>
+        <Button
+          className="generate-button"
+          size="lg"
+          onClick={() => this.generateColor()}
+        >
+          Generate
+        </Button>
         <br />
 
         <Button
