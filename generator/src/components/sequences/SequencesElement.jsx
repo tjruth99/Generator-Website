@@ -52,8 +52,8 @@ class SequencesElement extends React.Component {
           <div className="result-container">
             <br />
             <Collapse in={this.state.resultShow} fluid>
-              <div className="result" id="result-element">
-                Result: <b>{this.state.result}</b>
+              <div className="result" id="result-string">
+                {this.state.result}
               </div>
             </Collapse>
           </div>

@@ -67,6 +67,11 @@ Form {
   padding: 1rem;
 }
 
+.chord-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 4fr));
+}
+
 #tooltip-color {
   font-size: 1em;
   width: 200px;
@@ -86,29 +91,29 @@ Form {
 
 #result-chord {
   display: inline-block;
-  font-size: 6vh;
+  font-size: 4rem;
   word-wrap: break-word;
   border: 1px solid grey;
-  border-radius: 10%;
-  padding: 1rem;
+  box-shadow: 3px 2px #505050;
+  padding: 0.5rem;
   margin: 1rem;
 }
 
 #result-numbers {
-  font-size: 10vh;
+  font-size: 6rem;
   word-wrap: break-word;
   width: 100%;
 }
 
 #result-string {
-  font-size: 8vh;
+  font-size: 6rem;
   word-wrap: break-word;
   width: 100%;
   font-weight: bold;
 }
 
 #result-element {
-  font-size: 8vh;
+  font-size: 6rem;
   word-wrap: break-word;
   width: 100%;
 }
@@ -214,21 +219,27 @@ Form {
 
 @keyframes chord-animate-show {
   from {
-    font-size: 0vh;
+    font-size: 0rem;
   }
   to {
-    font-size: 6vh;
+    font-size: 4rem;
   }
 }
 
 @keyframes chord-animate-change {
   0% {
-    font-size: 6vh;
+    font-size: 4rem;
+    border: 2px solid rgb(241, 241, 241);
+    box-shadow: 5px 3px #000000;
   }
   50% {
-    font-size: 6.2vh;
+    font-size: 4.2rem;
+    border: 2px solid rgb(241, 241, 241);
+    box-shadow: 5px 3px #000000;
   }
   100% {
-    font-size: 6vh;
+    font-size: 4rem;
+    border: 1px solid grey;
+    box-shadow: 3px 2px #505050;
   }
 }
