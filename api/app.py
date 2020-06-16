@@ -23,7 +23,6 @@ def testName(name):
 @app.route('/random_walk', methods=['POST'])
 def getRandomWalkMap():
 
-    print("request: ", request)
     data = request.get_json()
     print("data: ", data)
     n = data['n']
@@ -41,7 +40,6 @@ def getRandomWalkMap():
 @app.route('/perlin_noise', methods=['POST'])
 def getPerlinNoiseMap():
 
-    print("request: ", request)
     data = request.get_json()
     print("data: ", data)
     scale = data['scale']
@@ -55,13 +53,13 @@ def getPerlinNoiseMap():
 @app.route('/dungeon', methods=['POST'])
 def getDungeonMap():
 
-    print("request: ", request)
     data = request.get_json()
     print("data: ", data)
     cells = data['cells']
+    ignore = data['ignore']
     print("cells: ", cells)
 
-    img = generateDungeon(cells)
+    img = generateDungeon(cells, ignore)
     return send_image(img)
 
 

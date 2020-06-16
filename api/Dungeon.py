@@ -3,11 +3,14 @@ import math
 import random
 from PIL import Image
 
+
+# Maximum size of a dungeon room
+size = 30
+
+
 # Generate a random dungeon in the style of binding of issac / original legend of zelda
 #   n - size of map
 #   maxRooms - maximum number of rooms to draw
-
-
 def generateClassicDungeon(n, maxRooms):
     # Check to make sure maxRooms isn't larger than map size
     if(maxRooms < 2 or maxRooms >= n**2):
@@ -96,19 +99,16 @@ def generateClassicDungeonSnake(n, numRooms):
     return map
 
 
-# TODO:
-#   - add more paths between rooms
-#   - make hallways more maze-like (?)
-def generateDungeon(cells):
-    n = cells * 30
-    maxRoomSizeDim = int(n/cells)-5
-    minRoomSizeDim = 10
+# generateDungeon - returns an image of a randomly generated dungeon
+# cells --  max number of rooms that span the length of the dungeon, cells^2 is the maximum possible number of rooms
+# ignoreRoomPercent -- the percent chance to ignore a room when going through each cell. 0 means every room is drawn, 100 means no rooms are drawn
+def generateDungeon(cells, ignoreRoomPercent):
+    n = cells * size
+    maxRoomSizeDim = size
+    minRoomSizeDim = int(size/3)
 
     # stores the start and end coordinates of each room
     rooms = []
-
-    # ignore some rooms to give dungeon a more varied look, not always a grid
-    ignoreRoomPercent = 25
 
     map = numpy.zeros((n, n), dtype=int)
 
@@ -132,7 +132,8 @@ def generateDungeon(cells):
                         map[int(x + startX)][int(y + startY)] = 1
 
     # Draw a path connecting each room
-    drawPath(map, rooms)
+    if(len(rooms) > 0):
+        drawPath(map, rooms)
 
     # draw a border on the edge to make the map look cleaner
     for i in range(n):
